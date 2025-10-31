@@ -2,7 +2,7 @@ import { useState } from "react";
 import TagsIcon from "/TagsIcon.png";
 import { Heading } from "../index";
 import { Container } from "../index";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function Header({
@@ -35,22 +35,24 @@ export default function Header({
         className={`min-h-12 flex place-items-center justify-between ${ConatinerClasses}`}
       >
         {/* Logo Image  */}
-        <div className="flex justify-center place-items-center w-2/12">
-          <span>
-            <img
-              src={TagsIcon}
-              alt="Logo"
-              width={40}
-              className="hover:scale-105 transition drop-shadow-xl inline-block"
-            />
-          </span>
-          {(location.pathname !== "/" || showMyName) && (
-            <span className="ml-2">
-              <Heading className=" text-xl " as="h6" align="left">
-                Ashok Bhaargaw
-              </Heading>
+        <div className="w-2/12">
+          <Link className="flex justify-center place-items-center " to={"/"}> 
+            <span>
+              <img
+                src={TagsIcon}
+                alt="Logo"
+                width={40}
+                className="hover:scale-105 transition drop-shadow-xl inline-block"
+              />
             </span>
-          )}
+            {(location.pathname !== "/" || showMyName) && (
+              <span className="ml-2">
+                <Heading className=" text-xl " as="h6" align="left">
+                  Ashok Bhaargaw
+                </Heading>
+              </span>
+            )}
+          </Link>
         </div>
 
         {/* Navigation  */}
