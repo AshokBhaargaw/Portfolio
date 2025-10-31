@@ -22,9 +22,9 @@ export default function HeroSection() {
                 Ashok Bhaargaw{" "}
               </Heading>
               , a passionate <b> front-end developer </b> specializing in{" "}
-              <b> React.js</b>. <br /> I enjoy building interactive and
-              user-friendly web applications that solve real-world
-              problems.{" "}
+              <b> React.js</b>. <br /> I have worked on WordPress in past
+              companies but now I’m focusing on React development to build
+              modern and interactive web apps.Currently expanding my skills beyond React by learning Next.js and backend development, aiming to become a full-stack JavaScript developer.
             </span>
           </div>
 

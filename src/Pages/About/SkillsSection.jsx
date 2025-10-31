@@ -6,7 +6,7 @@ import {
   Skillbar,
 } from "../../Components";
 import TreeImage from "/tree.png";
-import { FaReact, FaJs, FaBootstrap, FaCss3Alt, FaHtml5 } from "react-icons/fa";
+import { FaReact, FaJs, FaBootstrap, FaCss3Alt, FaHtml5, FaGithub  } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss } from "react-icons/si";
 
 export default function SkillsTree() {
@@ -28,6 +28,7 @@ export default function SkillsTree() {
               <NormalHeading as="h6"> Skill Set </NormalHeading>
               <Skillbar icon={<FaReact />} skill="React JS" value={75} />
               <Skillbar icon={<SiTypescript />} skill="TypeScript" value={60} />
+              <Skillbar icon={<FaGithub />} skill="Git & Github" value={60} />
               <Skillbar icon={<FaJs />} skill="JavaScript" value={75} />
               <Skillbar icon={<SiTailwindcss />} skill="tailwind" value={70} />
               <Skillbar icon={<FaBootstrap />} skill="Bootstrap" value={60} />
