@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---------- Light Mode ---------- */
+  --color-light-bg: #f8f7fb;
+  --color-light-text: #1b1b1f;
+  --color-light-secondary-text: #4b4b56;
+  --color-light-accent: #7b2ff7; /* purple */
+  --color-light-accent-gradient: linear-gradient(90deg, #ff4d8d, #7b2ff7);
+  --color-light-card-bg: #ffffff;
+  --color-light-border: #e6e6ef;
+  --color-light-btn-bg: #7b2ff7;
+  --color-light-btn-text: #ffffff;
+
+  /* ---------- Dark Mode ---------- */
+  --color-dark-bg: #0b0425; /* deep navy like your logo */
+  --color-dark-text: #ffffff;
+  --color-dark-secondary-text: #b3b3c0;
+  --color-dark-accent: #ff4d8d; /* pink highlight */
+  --color-dark-accent-gradient: linear-gradient(90deg, #ff4d8d, #7b2ff7);
+  --color-dark-card-bg: #1a103d;
+  --color-dark-border: #2c2460;
+  --color-dark-btn-bg: #7b2ff7;
+  --color-dark-btn-text: #ffffff;
+}
+
+
+/* Vertical Scrollabr  */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent ;
+  border-radius: 100px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color:   rgba(100, 116, 139, 0.5);
+}
