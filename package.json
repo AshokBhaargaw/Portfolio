@@ -1,16 +1,16 @@
 {
-  "homepage": "https://ashokbhaargaw.github.io/Portfolio/",
+  "homepage": "https://ashokbhaargaw.github.io/",
   "name": "portfolio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "react-scripts build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@appwrite.io/pink-icons": "^1.0.0",
