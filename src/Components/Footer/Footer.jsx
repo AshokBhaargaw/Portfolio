@@ -38,7 +38,7 @@ export default function Footer() {
             <Heading align="left">Ashok Bhaargaw</Heading>
           </button>
           <p className="text-sm text-gray-400 max-w-xs cursor-default">
-            Front-end Developer | Continue Learner
+            Front-end Developer | Continuous Learner
           </p>
         </div>
 

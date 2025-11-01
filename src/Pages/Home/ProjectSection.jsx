@@ -6,12 +6,13 @@ import {
   Button,
 } from "../../Components";
 import PortfolioImage1 from "/PortfolioImage/image.png";
+import PortfolioImage2 from "/PortfolioImage/image2.png";
 import { FaJs, FaReact } from "react-icons/fa";
-import { SiAppwrite, SiReacthookform } from "react-icons/si";
-import { useNavigate  } from "react-router-dom";
+import { SiAppwrite, SiReacthookform, SiRedux } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
 
 export default function ProjectSection() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const ProjectCardsData = [
     {
@@ -24,23 +25,21 @@ export default function ProjectSection() {
       PGithubLink: "https://github.com/AshokBhaargaw",
     },
     {
-      PName: "Personal Portfolio",
-      PImage: PortfolioImage1,
-      PTack: [<FaJs />, <FaReact />, <SiAppwrite />, <SiReacthookform />],
+      PName: "Browser Homepage",
+      PImage: PortfolioImage2,
+      PTack: [
+        <FaJs />,
+        <FaReact />,
+        <SiRedux />,
+        <SiAppwrite />,
+      ],
       PDescription:
-        "I created my portfolio website to showcase my skill, exprience, education and etc...",
-      PLiveDemoLink: "https://github.com/AshokBhaargaw",
-      PGithubLink: "https://github.com/AshokBhaargaw",
+        "I created this page for my browser, whene I can get all the nessory things which I need in my daily life. ex: search on google or youtube, my Social media links and etc... ",
+      PLiveDemoLink:
+        "https://ashokbhaargaw.github.io/React-Learning-Projects/BrowserHomepage/dist/",
+      PGithubLink: "https://github.com/AshokBhaargaw/React-Learning-Projects/tree/main/BrowserHomepage",
     },
-    {
-      PName: "Personal Portfolio",
-      PImage: PortfolioImage1,
-      PTack: [<FaJs />, <FaReact />, <SiAppwrite />, <SiReacthookform />],
-      PDescription:
-        "I created my portfolio website to showcase my skill, exprience, education and etc...",
-      PLiveDemoLink: "https://github.com/AshokBhaargaw",
-      PGithubLink: "https://github.com/AshokBhaargaw",
-    },
+
   ];
 
   return (
@@ -65,7 +64,15 @@ export default function ProjectSection() {
           ))}
         </div>
         <div className="text-right">
-          <Button onClick={()=>{ navigate('/portfolio'); window.scrollTo({top: 0}) } } variant="ghost">Check All Projects</Button>
+          <Button
+            onClick={() => {
+              navigate("/portfolio");
+              window.scrollTo({ top: 0 });
+            }}
+            variant="ghost"
+          >
+            Check All Projects
+          </Button>
         </div>
       </Container>
       <div className="overflow-hidden max-w-[100vw]">
