@@ -4,11 +4,10 @@ import {
   HalfContainer,
   Skillbar,
   Blackboard,
-  NormalHeading,
   Heading,
 } from "../../Components";
 import { FaReact, FaJs, FaBootstrap, FaCss3Alt, FaHtml5 } from "react-icons/fa";
-import { SiTypescript, SiTailwindcss } from "react-icons/si";
+import { SiTypescript, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 
 export default function ThreeInOne() {
   // Right Section
@@ -26,7 +25,7 @@ export default function ThreeInOne() {
           <Blackboard
             className={"min-h-115 flex justify-center place-items-center"}
           >
-            <div className="w-[100%]">
+            <div className="w-full">
               {selected === 0 ? (
                 <div>
                   <div>
@@ -52,24 +51,25 @@ export default function ThreeInOne() {
                 </div>
               ) : selected === 1 ? (
                 <div>
-                  <Skillbar icon={<FaReact />} skill="React JS" value={75} />
+                  <Skillbar icon={<SiNextdotjs />} skill="Next js - Currently Learning" value={20} />
+                  <Skillbar icon={<FaReact />} skill="React JS" value={80} />
                   <Skillbar
                     icon={<SiTypescript />}
                     skill="TypeScript"
-                    value={60}
+                    value={65}
                   />
-                  <Skillbar icon={<FaJs />} skill="JavaScript" value={75} />
+                  <Skillbar icon={<FaJs />} skill="JavaScript" value={80} />
                   <Skillbar
                     icon={<SiTailwindcss />}
                     skill="tailwind"
-                    value={70}
+                    value={85}
                   />
                   <Skillbar
                     icon={<FaBootstrap />}
                     skill="Bootstrap"
                     value={60}
                   />
-                  <Skillbar icon={<FaCss3Alt />} skill="CSS" value={80} />
+                  <Skillbar icon={<FaCss3Alt />} skill="CSS" value={85} />
                   <Skillbar icon={<FaHtml5 />} skill="HTML" value={90} />
                 </div>
               ) : (
@@ -79,7 +79,10 @@ export default function ThreeInOne() {
                       Vande Digital
                     </Heading>
                     <p className="text-gray-500 dark:text-gray-400 mt-3 text-lg mb-10">
-                    Built and customized WordPress websites using modern themes and plugins. Learned fundamentals of front-end design, responsive layouts, and user-focused web experiences.
+                      Built and customized WordPress websites using modern
+                      themes and plugins. Learned fundamentals of front-end
+                      design, responsive layouts, and user-focused web
+                      experiences.
                     </p>
                   </div>
                   <div>
@@ -87,7 +90,10 @@ export default function ThreeInOne() {
                       Kreativo Pro
                     </Heading>
                     <p className="text-gray-500 dark:text-gray-400 mt-3 text-lg mb-10">
-                     Developed and maintained WordPress sites while collaborating with clients and teams. Strengthened understanding of web structure, HTML, CSS, and dynamic content — laying a strong base for React development.
+                      Developed and maintained WordPress sites while
+                      collaborating with clients and teams. Strengthened
+                      understanding of web structure, HTML, CSS, and dynamic
+                      content — laying a strong base for React development.
                     </p>
                   </div>
                 </div>

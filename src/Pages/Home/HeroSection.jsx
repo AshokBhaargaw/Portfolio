@@ -1,5 +1,5 @@
 import React from "react";
-import MyHeroImage from "/myCutOut.png";
+import Resume from "/Ashok_Bhaargaw_Resume.pdf";
 import { Container, Button, Heading } from "../../Components/index";
 import Spline from "@splinetool/react-spline";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function HeroSection() {
             years of WordPress experience, I've transitioned to modern React
             development to create scalable, high-performance solutions.
           </p>
-          <div className="flex justify-between w-6/12">
+          <div className="flex justify-between w-8/12">
             <Button
               onClick={() => {
                 navigate("/contact");
@@ -25,11 +25,11 @@ export default function HeroSection() {
             >
               Contact
             </Button>
-            <Button onClick={() => {
-              navigate("/portfolio")
-            }} className="w-28" variant="secondary">
-              Portfolio
-            </Button>
+            <a href={Resume} download={Resume}>
+              <Button className="w-45" variant="secondary">
+                Download Resume
+              </Button>
+            </a>
           </div>
         </div>
         <div className=" h-130 w-full">
