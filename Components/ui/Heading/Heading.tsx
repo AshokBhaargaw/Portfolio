@@ -2,13 +2,11 @@ import "./Heading.css";
 import { ReactNode } from "react";
 
 type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-type Align = "left" | "center" | "right";
 
 interface HeadingProps {
   as?: HeadingLevel;
   children: ReactNode;
   subtitle?: string;
-  align?: Align;
   className?: string;
 }
 
@@ -16,7 +14,6 @@ export default function Heading({
   as = "h2",
   children,
   subtitle,
-  align = "center",
   className = "",
 }: HeadingProps) {
   const Tag = as;
@@ -31,7 +28,7 @@ export default function Heading({
   };
 
   return (
-    <div className={className} style={{ textAlign: align }}>
+    <div className={className}>
       <Tag
         className={`${sizeClasses[as]} tracking-tight bg-linear-to-r from-pink-500 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-[gradientMove_5s_ease_infinite] bg-[length:300%_300%]`}
         style={{

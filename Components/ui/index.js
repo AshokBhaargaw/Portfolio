@@ -9,7 +9,7 @@ import Skillbar from "./Skillbar/Skillbar";
 import Input from './Input/Input';
 import ContactInfoCard from './Cards/ContactInfoCard';
 import Footer from './Footer/Footer';
-import ProjectCard from './Cards/ProjectCard';
+import Project from './Project/Project'
 
 // Exporting
 export {
@@ -22,7 +22,7 @@ export {
     Skillbar,
     Input,
     HalfContainer,
-    ProjectCard,
     Footer,
     ContactInfoCard,
+    Project
 }

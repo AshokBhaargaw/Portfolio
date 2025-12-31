@@ -2,51 +2,74 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
-import { RxCross1 } from "react-icons/rx";
-import { CiMenuBurger } from "react-icons/ci";
+import { Github, Linkedin, Instagram, Home, User, Briefcase, Phone, Menu, X, ArrowUpRight } from "lucide-react";
 import Button from "../Buttons/Button";
 import Heading from "../Heading/Heading";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  const navLink = [
-    { icon: "❤️", title: "Home", link: "/" },
-    { icon: "😎", title: "About", link: "/about" },
-    { icon: "📂", title: "Portfolio", link: "/portfolio" },
-    { icon: "📞", title: "Contact", link: "/contact" },
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { icon: Home, title: "Home", link: "/" },
+    { icon: Briefcase, title: "Portfolio", link: "/portfolio" },
+    { icon: Phone, title: "Contact", link: "/#contact" },
   ];
 
-  const socialLink = [
+  const socialLinks = [
     {
       title: "LinkedIn",
-      icon: <FaLinkedin size={22} />,
+      icon: Linkedin,
       link: "https://www.linkedin.com/in/ashokbhaargaw/",
     },
     {
       title: "GitHub",
-      icon: <FaGithub size={22} />,
+      icon: Github,
       link: "https://github.com/ashokbhaargaw/",
     },
     {
       title: "Instagram",
-      icon: <FaInstagram size={22} />,
+      icon: Instagram,
       link: "https://www.instagram.com/dev.ashokbhaargaw/",
     },
   ];
 
   return (
-    <header>
-      <div className="fixed top-0 z-30 min-h-20 w-full bg-linear-to-b from-background to-transparent" />
+    <header className="flex justify-center w-full">
+      {/* Scroll Gradient Overlay */}
+      <div
+        className={`fixed top-0 w-full h-24 bg-linear-to-b z-40 from-background to-transparent transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'
+          }`}
+      />
 
-      <div className="fixed top-2 left-1/2 z-50 flex h-12 w-11/12 md:w-5/6 -translate-x-1/2 items-center justify-between rounded-4xl border border-gray-400/40 bg-black px-4 shadow-lg md:px-10">
+      <div
+        className={`
+          fixed top-4 z-50 flex items-center justify-between 
+          w-11/12 md:w-5/6 max-w-7xl
+          px-4 py-2 md:px-6 md:py-3
+          rounded-full border bg-red-500
+          transition-all duration-300 ease-in-out
+          ${scrolled
+            ? "bg-surface/50 backdrop-blur-xl border-white/10 shadow-lg shadow-primary/5"
+            : "bg-surface/50 backdrop-blur-md border-transparent"
+          }
+        `}
+      >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 md:w-1/5">
-          <span className="relative h-10 w-10">
+        <Link href="/" className="flex items-center gap-3 shrink-0 group">
+          <div className="relative h-10 min-w-10 overflow-hidden transition-transform duration-300 group-hover:scale-110">
             <Image
               src="/TagsIcon.png"
               alt="Logo"
@@ -54,88 +77,114 @@ export default function Header() {
               priority
               className="object-contain"
             />
-          </span>
-          <Heading as="h4" className="text-2xl">
+          </div>
+          <Heading as="h4" className="text-xl md:text-2xl font-bold tracking-tight">
             Ashok Bhaargaw
           </Heading>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex md:w-1/5 md:justify-center gap-3  md:min-w-2/5">
-          <span className="hidden md:inline md:min-w-20" />
-          {navLink.map((nav) => (
-            <Link
-              key={nav.link}
-              href={nav.link}
-              className="group flex items-center gap-1 text-xl font-medium"
-            >
-              <span>{nav.icon}</span>
-              <span
-                className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
-                  pathname === nav.link
-                    ? "max-w-50 opacity-100 scale-100"
-                    : "max-w-0 opacity-0 scale-95 group-hover:max-w-50 group-hover:opacity-100 group-hover:scale-100"
-                }`}
+        <nav className="hidden md:flex items-center gap-1 bg-background/50 p-1 rounded-full border border-white/5">
+          {navLinks.map((nav) => {
+            const isActive = pathname === nav.link;
+            return (
+              <Link
+                key={nav.link}
+                href={nav.link}
+                className={`
+                  relative flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                  ${isActive ? "text-white bg-white/10" : "text-gray-400 hover:text-white hover:bg-white/5"}
+                `}
               >
-                {nav.title}
-              </span>
-            </Link>
-          ))}
+                <nav.icon size={16} className={`${isActive ? "text-primary" : ""}`} />
+                <span>{nav.title}</span>
+                {isActive && (
+                  <span className="absolute inset-0 rounded-full bg-white/5 animate-pulse -z-10" />
+                )}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* Desktop Social + CTA */}
-        <div className="hidden md:flex items-center justify-end md:gap-4 md:min-w-2/6">
-          {socialLink.map((social) => (
-            <Link
-              key={social.title}
-              href={social.link}
-              target="_blank"
-              className="group flex items-center gap-1 text-xl font-medium"
-            >
-              <span className="overflow-hidden max-w-0 whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-[120px] group-hover:opacity-100">
-                {social.title}
-              </span>
-              {social.icon}
-            </Link>
-          ))}
-          <Button variant="ghost">Hire Now</Button>
+        <div className="hidden md:flex items-center gap-4">
+          {/* <div className="flex items-center gap-2 pr-4 border-r border-white/10">
+            {socialLinks.map((social) => (
+              <Link
+                key={social.title}
+                href={social.link}
+                target="_blank"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
+                aria-label={social.title}
+              >
+                <social.icon size={20} />
+              </Link>
+            ))}
+          </div> */}
+          <Link href="/contact">
+            <Button variant="primary" className="h-9 px-6 text-sm group">
+              Hire Now
+              <ArrowUpRight size={16} className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setMenu((prev) => !prev)}>
-          {menu ? <RxCross1 size={22} /> : <CiMenuBurger size={22} />}
+        <button
+          className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
+          onClick={() => setMenu(!menu)}
+          aria-label="Toggle menu"
+        >
+          {menu ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {menu && (
-        <div className="fixed inset-0 z-40 bg-black/40 md:hidden">
-          <div className="absolute right-4 top-14 w-56 rounded-xl border border-gray-700 bg-gray-900 p-4">
-            <nav>
-              {navLink.map((nav) => (
-                <Link
-                  key={nav.link}
-                  href={nav.link}
-                  onClick={() => setMenu(false)}
-                  className="block py-2 text-lg font-medium"
-                >
-                  {nav.icon} {nav.title}
-                </Link>
-              ))}
-            </nav>
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`
+          fixed inset-0 z-40 bg-black/90 backdrop-blur-3xl md:hidden transition-all duration-300
+          ${menu ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}
+        `}
+      >
+        <div className="flex flex-col items-center justify-center h-full gap-8 p-6">
+          <nav className="flex flex-col gap-6 w-full max-w-xs ">
+            {navLinks.map((nav, index) => (
+              <Link
+                key={nav.link}
+                href={nav.link}
+                onClick={() => setMenu(false)}
+                className="flex items-center mx-auto min-w-40 gap-4 text-2xl font-medium text-gray-300 hover:text-white transition-colors"
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                <nav.icon size={28} className="text-primary" />
+                {nav.title}
+              </Link>
+            ))}
+          </nav>
 
-            <Button className="mt-3 w-full">Hire Now</Button>
+          <div className="w-full max-w-xs h-px bg-white/10" />
 
-            <div className="mt-3 flex justify-around">
-              {socialLink.map((social) => (
-                <Link key={social.title} href={social.link} target="_blank">
-                  {social.icon}
-                </Link>
-              ))}
-            </div>
+          <div className="flex gap-8">
+            {socialLinks.map((social) => (
+              <Link
+                key={social.title}
+                href={social.link}
+                target="_blank"
+                className="text-gray-400 hover:text-primary transition-colors hover:scale-110"
+              >
+                <social.icon size={24} />
+              </Link>
+            ))}
           </div>
+
+          <Link href="/contact" className="w-full flex items-center justify-center">
+            <Button variant="primary" className="h-9 px-6 text-sm group w-4/6 mx-auto">
+              Hire Now
+              <ArrowUpRight size={16} className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Button>
+          </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 }

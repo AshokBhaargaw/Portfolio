@@ -1,15 +1,20 @@
+import React from "react";
 import HeroSection from "./HeroSection";
 import Experience from "./Experience";
-import SkillsSection from "./SkillsSection";
 import EducationSection from "./EducationSection";
+import Projects from "./Projects";
+import SkillBar from "./SkillBar";
+import Contact from '../contact/Contact'
 
-export default function About() {
+export default function page() {
   return (
     <main>
       <HeroSection />
-      <SkillsSection />
+      <SkillBar />
+      <Projects />
       <Experience />
       <EducationSection />
+      <Contact />
     </main>
   );
 }

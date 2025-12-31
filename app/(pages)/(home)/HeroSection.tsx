@@ -1,0 +1,129 @@
+"use client";
+
+import { Container, Button, Heading } from "@/Components/ui";
+import { useRouter } from "next/navigation";
+import { Github, Linkedin, Mail, FileText, Code2, Terminal, Cpu } from "lucide-react";
+import Image from "next/image";
+
+export default function HeroSection() {
+  const router = useRouter();
+
+  const socialLinks = [
+    { icon: Github, href: "https://github.com/AshokBhaargaw", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/ashokbhaargaw", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:ashok@example.com", label: "Email" }, // Placeholder, can be updated by user
+  ];
+
+  return (
+    <div className="relative overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -z-10 animate-pulse" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] -z-10" />
+      <Container>
+        <section className="flex flex-col-reverse mt-10 md:mt-0 md:flex-row items-center justify-center md:justify-between gap-12 pt-20">
+          {/* Left Content */}
+          <div className="w-full md:w-1/2 text-center md:text-left z-10 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-border-soft mb-6 w-fit mx-auto md:mx-0">
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+              <span className="text-xs font-medium text-subtle-foreground">Available for work</span>
+            </div>
+
+            <h6 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-tight mb-1">
+              Hello, I'm <br />
+            </h6>
+            <Heading as="h1" className="md:text-left text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight ">
+              Ashok Bhaargaw
+            </Heading>
+
+
+            <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0 mb-8">
+              I build fast, interactive web applications that users love. With <span className="text-foreground font-semibold">2+ years</span> of WordPress experience,
+              I’ve transitioned to modern <span className="text-foreground font-semibold">React & Next.js</span> development to create scalable, high-performance solutions.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start mb-10">
+              <Button
+                className="w-full sm:w-auto min-w-[140px] shadow-lg shadow-primary/25"
+                onClick={() => router.push("/contact")}
+              >
+                Contact Me
+              </Button>
+
+              <a
+                href="/Ashok_Bhaargaw_Resume.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto"
+              >
+                <Button variant="secondary" className="w-full sm:w-auto min-w-[140px] flex items-center justify-center gap-2">
+                  <FileText size={18} />
+                  <span>Resume</span>
+                </Button>
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center justify-center md:justify-start gap-6">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-subtle-foreground hover:text-primary transition-colors duration-300 transform hover:scale-110"
+                  aria-label={social.label}
+                >
+                  <social.icon size={24} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Content - Visual Profile Card */}
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end z-10">
+            <div className="relative w-full max-w-md aspect-square md:aspect-auto md:h-[500px] flex items-center justify-center">
+
+              {/* Decorative Floating Elements */}
+              <div className="absolute top-10 left-0 p-3 bg-card/80 backdrop-blur-md border border-border rounded-xl shadow-xl animate-float" style={{ animationDelay: "0s" }}>
+                <Code2 className="text-primary" size={28} />
+              </div>
+              <div className="absolute bottom-20 right-0 p-3 bg-card/80 backdrop-blur-md border border-border rounded-xl shadow-xl animate-float" style={{ animationDelay: "2s" }}>
+                <Terminal className="text-secondary" size={28} />
+              </div>
+              <div className="absolute top-1/2 right-[-20px] p-3 bg-card/80 backdrop-blur-md border border-border rounded-xl shadow-xl animate-float" style={{ animationDelay: "1s" }}>
+                <Cpu className="text-success" size={28} />
+              </div>
+
+              {/* Main Profile Card Placeholder */}
+              <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl bg-gradient-to-b from-border-soft to-card border border-border flex flex-col items-center justify-center p-6 text-center shadow-2xl card-glow transform rotate-[-3deg] hover:rotate-0 transition-transform duration-500">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-tr from-primary to-secondary mb-6 p-1">
+                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center overflow-hidden">
+                    {/* Placeholder for Image */}
+                    <div className="relative w-32 h-32">
+                      <Image
+                        src="/ashok.jpg"
+                        alt="Ashok Bhaargaw"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold text-foreground">Ashok Bhaargaw</h3>
+                <p className="text-muted-foreground mt-2">Full Stack Developer</p>
+                <div className="flex gap-2 mt-6">
+                  <span className="px-3 py-1 text-xs rounded-full bg-surface border border-border-soft text-primary">React</span>
+                  <span className="px-3 py-1 text-xs rounded-full bg-surface border border-border-soft text-secondary">Next.js</span>
+                  <span className="px-3 py-1 text-xs rounded-full bg-surface border border-border-soft text-success">Node</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </Container>
+    </div>
+  );
+}
