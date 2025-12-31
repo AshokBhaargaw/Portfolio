@@ -29,7 +29,7 @@ export default function ThreeInOne() {
               {selected === 0 && (
                 <div className="space-y-8">
                   <div>
-                    <Heading as="h4" align="left">
+                    <Heading as="h4">
                       Bachelor of Computer Applications (BCA)
                     </Heading>
                     <p className="text-gray-400 mt-2 text-sm sm:text-base">
@@ -40,7 +40,7 @@ export default function ThreeInOne() {
                   </div>
 
                   <div>
-                    <Heading as="h4" align="left">
+                    <Heading as="h4">
                       Secondary & Senior Secondary Education
                     </Heading>
                     <p className="text-gray-400 mt-2 text-sm sm:text-base">
@@ -82,7 +82,7 @@ export default function ThreeInOne() {
               {selected === 2 && (
                 <div className="space-y-8">
                   <div>
-                    <Heading as="h4" align="left">
+                    <Heading as="h4" >
                       Vande Digital
                     </Heading>
                     <p className="text-gray-400 mt-2 text-sm sm:text-base">
@@ -92,7 +92,7 @@ export default function ThreeInOne() {
                   </div>
 
                   <div>
-                    <Heading as="h4" align="left">
+                    <Heading as="h4">
                       Kreativo Pro
                     </Heading>
                     <p className="text-gray-400 mt-2 text-sm sm:text-base">

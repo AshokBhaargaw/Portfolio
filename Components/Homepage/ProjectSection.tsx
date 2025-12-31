@@ -1,6 +1,6 @@
 "use client";
 
-import { NormalHeading, Container, Button, ProjectCard } from "@/Components/ui";
+import { NormalHeading, Container, Button, } from "@/Components/ui";
 import { useRouter } from "next/navigation";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
@@ -47,7 +47,7 @@ export default function ProjectSection() {
         </NormalHeading>
 
         {/* Cards */}
-        <div className="flex flex-col md:flex-row gap-10">
+        {/* <div className="flex flex-col md:flex-row gap-10">
           {ProjectCardsData.map((p, i) => (
             <ProjectCard
               key={i}
@@ -59,7 +59,7 @@ export default function ProjectSection() {
               PGithubLink={p.PGithubLink}
             />
           ))}
-        </div>
+        </div> */}
 
         {/* View All Button */}
         <div className="mt-14 flex justify-center md:justify-end px-4 md:px-12 max-w-screen">
