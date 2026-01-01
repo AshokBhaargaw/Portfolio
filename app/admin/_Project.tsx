@@ -1,9 +1,8 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Project = {
-  id: number;
+  _id: string;
   title: string;
   techStack: string;
   description: string;
@@ -15,23 +14,48 @@ export default function ProjectPage() {
   const [techStack, setTechStack] = useState("");
   const [description, setDescription] = useState("");
 
-  const addProject = (e: React.FormEvent) => {
+  // Fetch projects on mount
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/projects");
+        if (response.ok) {
+          const data = await response.json();
+          setProjects(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  const addProject = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !techStack) return;
 
-    setProjects((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        title,
-        techStack,
-        description,
-      },
-    ]);
+    try {
+      const response = await fetch("/api/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, techStack, description }),
+      });
 
-    setTitle("");
-    setTechStack("");
-    setDescription("");
+      if (response.ok) {
+        const newProject = await response.json();
+        setProjects((prev) => [...prev, newProject]);
+
+        setTitle("");
+        setTechStack("");
+        setDescription("");
+      } else {
+        console.error("Failed to add project");
+      }
+    } catch (error) {
+      console.error("Error adding project:", error);
+    }
   };
 
   return (
@@ -90,7 +114,7 @@ export default function ProjectPage() {
         ) : (
           projects.map((project) => (
             <div
-              key={project.id}
+              key={project._id}
               className="border border-slate-700 rounded-xl p-4 sm:p-5"
             >
               <h3 className="text-base sm:text-lg font-semibold">

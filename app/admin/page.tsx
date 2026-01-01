@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 
-import Home from "./_Home";
+import Overview from "./_Overview";
 import Project from "./_Project";
 import Experience from "./_Experience";
 import SocialDetails from "./_SocialDetails";
 
-type Section = "home" | "project" | "experience" | "social";
+type Section = "overview" | "project" | "experience" | "social";
 
 export default function AdminPage() {
-  const [active, setActive] = useState<Section>("home");
+  const [active, setActive] = useState<Section>("overview");
 
   return (
     <div className="min-h-screen w-screen flex flex-col md:flex-row">
@@ -18,10 +18,10 @@ export default function AdminPage() {
       <aside className="w-full  md:w-64 md:min-h-screen bg-linear-to-b from-purple-800 to-purple-950">
         <nav className=" flex md:flex-col justify-around gap-2 p-4 md:space-y-4 ">
           <SidebarButton
-            active={active === "home"}
-            onClick={() => setActive("home")}
+            active={active === "overview"}
+            onClick={() => setActive("overview")}
           >
-            Home
+            Overview
           </SidebarButton>
 
           <SidebarButton
@@ -49,7 +49,7 @@ export default function AdminPage() {
 
       {/* Content */}
       <main className="flex w-full p-4 md:p-8 bg-[#1E293B] ">
-        {active === "home" && <Home />}
+        {active === "overview" && <Overview />}
         {active === "project" && <Project />}
         {active === "experience" && <Experience />}
         {active === "social" && <SocialDetails />}
@@ -57,6 +57,8 @@ export default function AdminPage() {
     </div>
   );
 }
+
+
 
 // Button
 function SidebarButton({

@@ -44,7 +44,7 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start mb-10">
               <Button
                 className="w-full sm:w-auto min-w-[140px] shadow-lg shadow-primary/25"
-                onClick={() => router.push("/contact")}
+                onClick={() => router.push("/#contact")}
               >
                 Contact Me
               </Button>

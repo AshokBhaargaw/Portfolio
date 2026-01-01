@@ -30,6 +30,19 @@ export default function Form() {
     setBtnDisabled(true);
 
     try {
+      // Save to MongoDB
+      const apiResponse = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!apiResponse.ok) {
+        throw new Error("Failed to save to database");
+      }
+
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
@@ -44,7 +57,7 @@ export default function Form() {
       setBtnText("Sent!");
       reset();
     } catch (error) {
-      console.log("EmailJS error:", error);
+      console.error("Form submission error:", error);
       setBtnText("Failed");
     } finally {
       setTimeout(() => {
