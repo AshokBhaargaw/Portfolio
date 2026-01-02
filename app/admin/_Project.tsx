@@ -46,7 +46,6 @@ export default function ProjectPage() {
       if (response.ok) {
         const newProject = await response.json();
         setProjects((prev) => [...prev, newProject]);
-
         setTitle("");
         setTechStack("");
         setDescription("");

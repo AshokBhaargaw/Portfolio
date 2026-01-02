@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const ProjectSchema = new mongoose.Schema({
     title: String,
-    techStack: String,
     description: String,
+    techStack: String,
     image: String,
     liveUrl: String,
     githubUrl: String,
