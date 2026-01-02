@@ -129,7 +129,7 @@ export default function HeroSection() {
 
               {/* Main Profile Card Placeholder */}
               <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl bg-linear-to-b from-border-soft to-card border border-border flex flex-col items-center justify-center p-6 text-center shadow-2xl card-glow transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="w-32 h-32 rounded-full bg-linear-to-tr from-primary to-secondary mb-6 p-1">
+                <div className="w-32 h-32 rounded-full bg-linear-to-tr from-primary to-secondary mb-4 p-1">
                   <div className="w-full h-full rounded-full bg-background flex items-center justify-center overflow-hidden">
                     {/* Placeholder for Image */}
                     <div className="relative w-32 h-32">
@@ -145,12 +145,12 @@ export default function HeroSection() {
                 <p className="text-muted-foreground text-sm">
                   Full Stack Developer
                 </p>
-                <h3 className="text-2xl font-bold text-foreground">
+                <h3 className="text-2xl my-1 font-bold text-foreground">
                   Ashok Bhaargaw
                 </h3>
-                <div className="flex gap-2 mt-6 flex-wrap justify-center">
+                <div className="flex gap-2 mt-2 flex-wrap justify-center">
                   {/* 
-                  Colors for the future
+------------------ Colors for the future ------------------
                   "text-indigo-400",
                   "text-teal-400",
                   "text-sky-400",
@@ -172,8 +172,8 @@ export default function HeroSection() {
                     ["React", "text-green-400"],
                     ["Typescript", "text-indigo-400"],
                     ["Javascript", "text-pink-400"],
-                    ["CSS", "text-purple-400"],
-                    ["HTML", "text-emerald-400"],
+                    ["Tailwind", "text-lime-400"],
+                    ["HTML & CSS", "text-amber-400"],
                   ].map((skill) => (
                     <span
                       key={skill[0]}

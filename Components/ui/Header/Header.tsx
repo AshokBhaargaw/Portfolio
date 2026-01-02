@@ -123,7 +123,7 @@ export default function Header() {
           </div> */}
           <Link href="/contact">
             <Button variant="primary" className="h-9 px-6 text-sm group">
-              Hire Now
+              Hire Me
               <ArrowUpRight size={16} className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
           </Link>

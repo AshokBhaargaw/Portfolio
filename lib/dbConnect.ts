@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
+const cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function dbConnect() {
   if (cached.conn) return cached.conn;
