@@ -48,7 +48,7 @@ export default function AdminPage() {
       </aside>
 
       {/* Content */}
-      <main className="flex w-full p-4 md:p-8 bg-[#1E293B] ">
+      <main className="flex w-full px-4 py-1 bg-[#1E293B] ">
         {active === "overview" && <Overview />}
         {active === "project" && <Project />}
         {active === "experience" && <Experience />}
