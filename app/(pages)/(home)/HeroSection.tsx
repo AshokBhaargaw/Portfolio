@@ -128,7 +128,7 @@ export default function HeroSection() {
               </div>
 
               {/* Main Profile Card Placeholder */}
-              <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl bg-linear-to-b from-border-soft to-card border border-border flex flex-col items-center justify-center p-6 text-center shadow-2xl card-glow transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="relative w-72 min-h-80 sm:w-80 sm:h-96 rounded-2xl bg-linear-to-b from-border-soft to-card border border-border flex flex-col items-center justify-center p-6 text-center shadow-2xl card-glow transform rotate-3 hover:rotate-0 transition-transform duration-500">
                 <div className="w-32 h-32 rounded-full bg-linear-to-tr from-primary to-secondary mb-4 p-1">
                   <div className="w-full h-full rounded-full bg-background flex items-center justify-center overflow-hidden">
                     {/* Placeholder for Image */}

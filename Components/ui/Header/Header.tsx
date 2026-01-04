@@ -108,25 +108,15 @@ export default function Header() {
 
         {/* Desktop Social + CTA */}
         <div className="hidden md:flex items-center gap-4">
-          {/* <div className="flex items-center gap-2 pr-4 border-r border-white/10">
-            {socialLinks.map((social) => (
-              <Link
-                key={social.title}
-                href={social.link}
-                target="_blank"
-                className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
-                aria-label={social.title}
-              >
-                <social.icon size={20} />
-              </Link>
-            ))}
-          </div> */}
-          <Link href="/contact">
+          <a
+            href="tel:+917014137575"
+            className="w-full flex items-center justify-center"
+          >
             <Button variant="primary" className="h-9 px-6 text-sm group">
               Hire Me
               <ArrowUpRight size={16} className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -177,12 +167,16 @@ export default function Header() {
             ))}
           </div>
 
-          <Link href="/contact" className="w-full flex items-center justify-center">
-            <Button variant="primary" className="h-9 px-6 text-sm group w-4/6 mx-auto">
-              Hire Now
+          <a
+            href="tel:+917014137575"
+            className="w-full flex items-center justify-center"
+          >
+            <Button variant="primary" className="h-9 px-6 text-sm group">
+              Hire Me
               <ArrowUpRight size={16} className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
-          </Link>
+          </a>
+
         </div>
       </div>
     </header>

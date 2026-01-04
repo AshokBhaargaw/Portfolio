@@ -37,7 +37,7 @@ const educationData = [
 
 export default function EducationSection() {
   return (
-    <section className="pt-20 md:py-24 relative overflow-hidden" id="education">
+    <section className=" pb-40 relative overflow-hidden" id="education">
       {/* Background Pattern - distinct from blobs */}
       <div className="absolute inset-0 opacity-[0.03]"
         style={{

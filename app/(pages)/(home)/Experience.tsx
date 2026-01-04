@@ -65,7 +65,7 @@ export default function Experience() {
           </div>
         )}
         <motion.div
-          className=" origin-left absolute left-1/2 -translate-x-1/2 w-100 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary"
+          className=" origin-left absolute left-1/2 -translate-x-1/2 w-100 h-0.5 bg-linear-to-r from-primary via-secondary to-primary"
         />
 
         <div ref={ref} className="relative flex flex-col items-center">
@@ -75,7 +75,7 @@ export default function Experience() {
           {/* Central Line (Desktop) - Animated Foreground */}
           <motion.div
             style={{ scaleY: scaleY, originY: 0 }}
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 md:w-1 bg-gradient-to-b from-primary via-secondary to-primary md:-translate-x-1/2 z-0"
+            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 md:w-1 bg-linear-to-b from-primary via-secondary to-primary md:-translate-x-1/2 z-0"
           />
 
           <div className="w-full space-y-12 mt-10">
@@ -96,7 +96,7 @@ export default function Experience() {
                   >
                     <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{exp.company}</h3>
                     <h4 className="text-lg font-semibold text-primary/80 mb-4 flex items-center gap-2 w-full justify-start md:justify-center lg:justify-start">
-                      <span className={`flex items-center gap-2 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
+                      <span className={`flex items-center gap-2 w-full ${index % 2 === 0 ? "md:justify-end" : "md:justify-start"}`}>
                         {exp.role}
                       </span>
                     </h4>

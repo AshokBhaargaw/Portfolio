@@ -1,5 +1,5 @@
 
-export default function AdminPage() {
+export default function Profile() {
 
   return (
     <div className="min-h-screen w-screen flex flex-col md:flex-row">

@@ -33,13 +33,15 @@ export default function Project({ project, currentProject, totalProjects, onNext
 
           <div className="absolute top-[6%] left-[11%] w-[78%] h-[80%] rounded overflow-hidden bg-black">
             <div className="h-full overflow-y-auto scrollbar-hide">
-              <Image
-                src={project.image || "/PortfolioImage/image.png"}
-                alt={`${project.title} preview`}
-                width={1200}
-                height={1400}
-                className="w-full h-auto object-cover"
-              />
+              <a href={project.liveUrl} target="_blank">
+                <Image
+                  src={project.image || "/PortfolioImage/image.png"}
+                  alt={`${project.title} preview`}
+                  width={1200}
+                  height={1400}
+                  className="w-full h-auto object-cover"
+                />
+              </a>
             </div>
           </div>
         </div>

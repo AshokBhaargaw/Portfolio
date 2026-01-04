@@ -52,11 +52,11 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact">
-      <Container className="min-h-screen md:pt-30 md:px-4 ">
+    <section id="contact" >
+      <Container className="min-h-screen md:px-4 ">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           {/* Left: Contact Info */}
-          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start mt-10">
+          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start">
             <Heading as="h1" className="mb-6 text-center w-full">
               Let&apos;s Get in touch
             </Heading>
