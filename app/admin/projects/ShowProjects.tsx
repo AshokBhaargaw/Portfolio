@@ -6,6 +6,7 @@ import { fetchProjects, deleteProject, updateProject, Project } from "@/redux/sl
 import type { RootState, AppDispatch } from "@/redux/store";
 import { Github, ExternalLink, Trash2, Code2, Layers, Sparkles, Pencil, X, Check, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function ShowProjects() {
   const dispatch = useDispatch<AppDispatch>();
@@ -113,7 +114,7 @@ export default function ShowProjects() {
                     {/* Project Image Placeholder */}
                     <div className="w-full md:w-72 h-48 md:h-auto bg-slate-800/50 relative overflow-hidden flex-shrink-0 border-b md:border-b-0 md:border-r border-slate-800">
                       {project.image ? (
-                        <img
+                        <Image
                           src={project.image}
                           alt={project.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

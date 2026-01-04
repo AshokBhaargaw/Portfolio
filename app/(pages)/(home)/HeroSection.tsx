@@ -12,6 +12,7 @@ import {
   Cpu,
 } from "lucide-react";
 import Image from "next/image";
+import CldImageComp from "@/Components/utility/CldImageComp";
 
 export default function HeroSection() {
   const router = useRouter();
@@ -187,6 +188,7 @@ export default function HeroSection() {
             </div>
           </div>
         </section>
+        <CldImageComp />
       </Container>
     </div>
   );

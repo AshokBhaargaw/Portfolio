@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -70,7 +71,7 @@ export default function AddProjects() {
       animate={{ opacity: 1, y: 0 }}
       className="bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-2xl overflow-hidden shadow-2xl"
     >
-      <div className="p-6 md:p-8 border-b border-slate-800">
+      <div className="px-6 py-2 border-b border-slate-800">
         <h2 className="text-xl font-black text-white flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-purple-500" />
           Create New Project
@@ -78,10 +79,10 @@ export default function AddProjects() {
         <p className="text-slate-500 text-xs mt-1 uppercase tracking-widest font-bold">Add a fresh masterpiece to your portfolio</p>
       </div>
 
-      <form onSubmit={handleAddProject} className="p-6 md:p-8 space-y-8">
+      <form onSubmit={handleAddProject} className="px-6 md:px-8 py-3 space-y-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Main Info */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] flex items-center gap-2">
                 <Terminal className="w-3 h-3" /> Project Title
@@ -95,7 +96,7 @@ export default function AddProjects() {
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] flex items-center gap-2">
                 <Layers className="text-purple-500/50 w-3 h-3" /> Description
               </label>
@@ -168,11 +169,11 @@ export default function AddProjects() {
             <label className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] flex items-center gap-2">
               <ImageIcon className="w-3 h-3" /> Project Image
             </label>
-            <div className="min-h-[300px] lg:h-[calc(100%-2rem)] border-2 border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center bg-slate-800/20 relative group overflow-hidden">
+            <div className="min-h-75 lg:h-[calc(100%-2rem)] border-2 border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center bg-slate-800/20 relative group overflow-hidden">
               <ImageIcon className="w-12 h-12 text-slate-700 group-hover:text-purple-500/50 transition-colors" />
               <span className="text-[10px] uppercase font-black text-slate-600 tracking-widest mt-4 group-hover:text-purple-500/50 transition-colors text-center px-4">Upload Module Locked</span>
               <p className="text-[9px] text-slate-700 mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity">FUTURE ASSET MANAGEMENT</p>
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
           </div>
         </div>
@@ -205,9 +206,9 @@ export default function AddProjects() {
 
 
 // Add Manual Item
-const addManualItem = (setArray: any, value: string, setValue: any) => {
+const addManualItem = (setArray: React.Dispatch<React.SetStateAction<string[]>>, value: string, setValue: React.Dispatch<React.SetStateAction<string>>) => {
   if (value.trim()) {
-    setArray((prev: any) => [...prev, value.trim()]);
+    setArray((prev: string[]) => [...prev, value.trim()]);
     setValue("");
   }
 };
