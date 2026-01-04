@@ -1,7 +1,13 @@
 import React from 'react'
+import AddExperience from './AddExperience'
+import "./datePickerStyle.css"
+import ShowExperience from './ShowExperience'
 
 export default function page() {
   return (
-    <div>page</div>
+    <main>
+      <AddExperience />
+      <ShowExperience />
+    </main>
   )
 }

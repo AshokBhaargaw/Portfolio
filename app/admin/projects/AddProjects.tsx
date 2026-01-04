@@ -1,10 +1,12 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { uploadProject } from "@/redux/slices/projects/projectSlice";
-import { Sparkles, Terminal, Globe, Github, Plus, Layers, Image as ImageIcon, X } from "lucide-react";
+import { uploadProject } from "@/redux/slices/projectSlice";
+import { Sparkles, Terminal, Globe, Github, Plus, Layers, Image as ImageIcon, X, Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
 
 export default function AddProjects() {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,6 +22,45 @@ export default function AddProjects() {
   const [keyFeaturesArray, setKeyFeaturesArray] = useState<string[]>([]);
   const [liveUrl, setLiveUrl] = useState("");
   const [githubUrl, setGithubUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  // Fix scrollability issue after Cloudinary upload widget closes
+  useEffect(() => {
+    // Function to restore body scroll
+    const restoreScroll = () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+
+    // Check periodically if Cloudinary modal is closed and restore scroll
+    const checkModal = setInterval(() => {
+      const cloudinaryModal = document.querySelector('[data-testid="uw-modal"]') ||
+        document.querySelector('.uw-modal') ||
+        document.querySelector('[class*="uw-modal"]');
+
+      if (!cloudinaryModal) {
+        restoreScroll();
+      }
+    }, 100);
+
+    // Also restore scroll when imageUrl changes (after successful upload)
+    let timeout: NodeJS.Timeout | null = null;
+    if (imageUrl) {
+      // Small delay to ensure modal has closed
+      timeout = setTimeout(() => {
+        restoreScroll();
+      }, 500);
+    }
+
+    // Cleanup on unmount or when imageUrl changes
+    return () => {
+      clearInterval(checkModal);
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      restoreScroll();
+    };
+  }, [imageUrl]);
 
   const arrayTrimmer = (e: React.KeyboardEvent<HTMLInputElement>, setArray: React.Dispatch<React.SetStateAction<string[]>>, setLocalValue: React.Dispatch<React.SetStateAction<string>>) => {
     if (e.key === 'Enter') {
@@ -51,6 +92,7 @@ export default function AddProjects() {
         keyFeatures: keyFeaturesArray,
         liveUrl,
         githubUrl,
+        image: imageUrl,
       })).unwrap();
 
       // clear form after success
@@ -60,16 +102,20 @@ export default function AddProjects() {
       setGithubUrl("");
       setTechStackArray([]);
       setKeyFeaturesArray([]);
+      setImageUrl("");
     } catch (err) {
       console.error("Failed to add project:", err);
     }
   };
 
+
+  console.log(imageUrl)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-2xl overflow-hidden shadow-2xl"
+      className="bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-2xl overflow-hidden shadow-2xl [scrollbar-width:none]"
     >
       <div className="px-6 py-2 border-b border-slate-800">
         <h2 className="text-xl font-black text-white flex items-center gap-2">
@@ -79,7 +125,7 @@ export default function AddProjects() {
         <p className="text-slate-500 text-xs mt-1 uppercase tracking-widest font-bold">Add a fresh masterpiece to your portfolio</p>
       </div>
 
-      <form onSubmit={handleAddProject} className="px-6 md:px-8 py-3 space-y-4">
+      <form onSubmit={handleAddProject} className="px-6 md:px-8 py-3 space-y-4 [scrollbar-width:none]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Main Info */}
           <div className="space-y-4">
@@ -169,11 +215,56 @@ export default function AddProjects() {
             <label className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] flex items-center gap-2">
               <ImageIcon className="w-3 h-3" /> Project Image
             </label>
-            <div className="min-h-75 lg:h-[calc(100%-2rem)] border-2 border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center bg-slate-800/20 relative group overflow-hidden">
-              <ImageIcon className="w-12 h-12 text-slate-700 group-hover:text-purple-500/50 transition-colors" />
-              <span className="text-[10px] uppercase font-black text-slate-600 tracking-widest mt-4 group-hover:text-purple-500/50 transition-colors text-center px-4">Upload Module Locked</span>
-              <p className="text-[9px] text-slate-700 mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity">FUTURE ASSET MANAGEMENT</p>
-              <div className="absolute inset-0 bg-linear-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="min-h-75 lg:h-[calc(100%-2rem)] border-2 border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center bg-slate-800/20 relative group overflow-hidden p-4">
+              {imageUrl ? (
+                <div className="w-full h-full rounded-lg">
+                  <Image
+                    src={imageUrl}
+                    alt="Project preview"
+                    fill
+                    className="object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setImageUrl("")}
+                    className="absolute top-2 right-2 p-2 rounded-lg bg-red-500/90 hover:bg-red-500 text-white transition-all z-10"
+                    title="Remove image"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <CldUploadWidget
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || ""}
+                  onSuccess={(result: any) => {
+                    setImageUrl(result.info.secure_url);
+                    // Restore scroll immediately after upload
+                    setTimeout(() => {
+                      document.body.style.overflow = '';
+                      document.body.style.paddingRight = '';
+                    }, 100);
+                  }}
+                  onClose={() => {
+                    // Restore scroll when widget closes
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                  }}
+                >
+                  {({ open }) => (
+                    <button
+                      type="button"
+                      onClick={() => open()}
+                      className="w-full h-full min-h-[300px] flex flex-col items-center justify-center gap-3 hover:bg-slate-800/40 transition-all rounded-lg cursor-pointer"
+                    >
+                      <Upload className="w-12 h-12 text-purple-500/50 group-hover:text-purple-500/70 transition-colors" />
+                      <span className="text-[10px] uppercase font-black text-slate-600 group-hover:text-purple-500/50 tracking-widest transition-colors text-center px-4">
+                        Click to Upload Image
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                    </button>
+                  )}
+                </CldUploadWidget>
+              )}
             </div>
           </div>
         </div>
@@ -254,7 +345,7 @@ const InputField = ({ label, value, onChange, onKeyDown, onAdd, onRemove, placeh
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto pr-2 custom-scrollbar">
+      <div className="flex flex-wrap gap-2 max-h-24 pr-2">
         <AnimatePresence>
           {displayArray.map((item, index) => (
             <motion.span

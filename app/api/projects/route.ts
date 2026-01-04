@@ -20,7 +20,7 @@ export const POST = async (req: Request) => {
   try {
     await dbConnect();
     const body = await req.json();
-    const { title, techStack, description, keyFeatures, liveUrl, githubUrl } = body;
+    const { title, techStack, description, keyFeatures, liveUrl, githubUrl, image } = body;
 
     const project = await Project.create({
       title,
@@ -28,7 +28,8 @@ export const POST = async (req: Request) => {
       description,
       keyFeatures,
       liveUrl,
-      githubUrl
+      githubUrl,
+      image
     });
 
     return NextResponse.json(project);

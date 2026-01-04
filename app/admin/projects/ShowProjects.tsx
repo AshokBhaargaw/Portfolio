@@ -2,11 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProjects, deleteProject, updateProject, Project } from "@/redux/slices/projects/projectSlice";
+import { fetchProjects, deleteProject, updateProject, } from "@/redux/slices/projectSlice";
 import type { RootState, AppDispatch } from "@/redux/store";
-import { Github, ExternalLink, Trash2, Code2, Layers, Sparkles, Pencil, X, Check, Image as ImageIcon } from "lucide-react";
+import { Github, ExternalLink, Trash2, Code2, Layers, Sparkles, Pencil, X, Check, Image as ImageIcon, Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { CldUploadWidget } from "next-cloudinary";
+import { Project } from "@/redux/types/project";
 
 export default function ShowProjects() {
   const dispatch = useDispatch<AppDispatch>();
@@ -112,12 +114,14 @@ export default function ShowProjects() {
                 >
                   <div className="flex flex-col md:flex-row h-full">
                     {/* Project Image Placeholder */}
-                    <div className="w-full md:w-72 h-48 md:h-auto bg-slate-800/50 relative overflow-hidden flex-shrink-0 border-b md:border-b-0 md:border-r border-slate-800">
+                    <div className="w-full max-h-70  overflow-y-auto md:w-72 h-48 md:h-auto bg-slate-800/50 relative overflow-hidden border-b md:border-b-0 md:border-r border-slate-800">
                       {project.image ? (
                         <Image
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          width={288}
+                          height={192}
+                          className="w-full h-full object-cover transition-transform duration-500"
                         />
                       ) : (
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-600 space-y-2 bg-gradient-to-br from-slate-800/80 to-slate-900/80">
@@ -130,8 +134,51 @@ export default function ShowProjects() {
 
                     <div className="flex-1 p-5 md:p-8 flex flex-col min-w-0">
                       {isEditing ? (
-                        /* Edit Form */
                         <div className="space-y-6">
+                          {/* Image Upload Section */}
+                          <div className="space-y-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Project Image</label>
+                            <div className="flex items-center gap-4">
+                              {editForm.image && (
+                                <div className="relative w-32 h-32 rounded-lg overflow-hidden border-2 border-slate-700">
+                                  <Image
+                                    src={editForm.image}
+                                    alt="Preview"
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                              )}
+                              <CldUploadWidget
+                                uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || ""}
+                                onSuccess={(result: any) => {
+                                  setEditForm({ ...editForm, image: result.info.secure_url });
+                                }}
+                              >
+                                {({ open }) => (
+                                  <button
+                                    type="button"
+                                    onClick={() => open()}
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600/20 text-purple-300 border border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-500/50 transition-all text-xs font-bold uppercase tracking-wider"
+                                  >
+                                    <Upload className="w-4 h-4" />
+                                    {editForm.image ? 'Change Image' : 'Upload Image'}
+                                  </button>
+                                )}
+                              </CldUploadWidget>
+                              {editForm.image && (
+                                <button
+                                  type="button"
+                                  onClick={() => setEditForm({ ...editForm, image: '' })}
+                                  className="p-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-all"
+                                  title="Remove image"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              )}
+                            </div>
+                          </div>
+
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div className="space-y-1">
                               <label className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Title</label>
@@ -210,8 +257,8 @@ export default function ShowProjects() {
                                 </button>
                               </div>
                               <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-2 custom-scrollbar">
-                                {editForm.keyFeatures?.map((feature, i) => (
-                                  <span key={i} className="flex items-center gap-1.5 bg-blue-500/10 text-blue-300 text-[10px] px-2.5 py-1 rounded-md border border-blue-500/20">
+                                {editForm.keyFeatures?.map((feature: string, i: number) => (
+                                  <span key={feature} className="flex items-center gap-1.5 bg-blue-500/10 text-blue-300 text-[10px] px-2.5 py-1 rounded-md border border-blue-500/20">
                                     {feature}
                                     <X className="w-3 h-3 cursor-pointer hover:text-red-400" onClick={() => removeArrayItem('keyFeatures', i)} />
                                   </span>
@@ -238,8 +285,8 @@ export default function ShowProjects() {
                                 {project.title}
                               </h3>
                               <div className="flex flex-wrap gap-2 mt-3">
-                                {project.techStack.map((tech, i) => (
-                                  <span key={i} className="text-[9px] uppercase tracking-widest font-black px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-400 border border-slate-700/50 hover:border-purple-500/40 hover:text-purple-300 transition-all cursor-default">
+                                {project.techStack.map((tech: string, i:number) => (
+                                  <span key={tech} className="text-[9px] uppercase tracking-widest font-black px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-400 border border-slate-700/50 hover:border-purple-500/40 hover:text-purple-300 transition-all cursor-default">
                                     {tech}
                                   </span>
                                 ))}
@@ -308,12 +355,14 @@ export default function ShowProjects() {
         )}
       </AnimatePresence>
 
-      {error && projects.length > 0 && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 p-4 rounded-2xl bg-red-500/5 border border-red-500/10 text-red-400 text-[11px] font-bold uppercase tracking-widest text-center">
-          <Sparkles className="w-3 h-3 inline-block mr-2 opacity-50" />
-          {error}
-        </motion.div>
-      )}
-    </section>
+      {
+        error && projects.length > 0 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 p-4 rounded-2xl bg-red-500/5 border border-red-500/10 text-red-400 text-[11px] font-bold uppercase tracking-widest text-center">
+            <Sparkles className="w-3 h-3 inline-block mr-2 opacity-50" />
+            {error}
+          </motion.div>
+        )
+      }
+    </section >
   );
 }

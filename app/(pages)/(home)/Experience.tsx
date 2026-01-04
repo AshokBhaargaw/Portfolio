@@ -1,13 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Container, Heading } from "@/Components/ui";
-import { Briefcase, Calendar } from "lucide-react";
+import { Briefcase, Calendar, Loader2, AlertCircle } from "lucide-react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { experiences } from "@/data/experiences";
-
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "@/redux/store";
+import { fetchExperiences } from "@/redux/slices/experienceSlice";
 export default function Experience() {
- 
+  const dispatch = useDispatch<AppDispatch>();
+  const { experiences, loading, error } = useSelector((state: RootState) => state.experience);
+
+  useEffect(() => {
+    dispatch(fetchExperiences());
+  }, [dispatch]);
 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -31,6 +37,33 @@ export default function Experience() {
         <motion.div className="text-4xl md:text-5xl font-bold text-center pb-5 mx-auto">
           Work Experience
         </motion.div>
+
+        {loading && experiences.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-10 h-10 text-primary animate-spin mb-4" />
+            <p className="text-gray-400">Loading experiences...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+            <p className="text-red-400 font-medium">Failed to load experiences</p>
+            <p className="text-gray-500 text-sm">{error}</p>
+            <button
+              onClick={() => dispatch(fetchExperiences())}
+              className="mt-6 px-6 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-full border border-primary/30 transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        )}
+
+        {!loading && !error && experiences.length === 0 && (
+          <div className="text-center py-20 text-gray-500">
+            <p>No work experience found.</p>
+          </div>
+        )}
         <motion.div
           className=" origin-left absolute left-1/2 -translate-x-1/2 w-100 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary"
         />
@@ -48,7 +81,7 @@ export default function Experience() {
           <div className="w-full space-y-12 mt-10">
             {experiences.map((exp, index) => (
               <div
-                key={index}
+                key={exp._id || index}
                 className={`relative flex flex-col md:flex-row gap-8 items-start md:items-center ${index % 2 === 0 ? "md:flex-row-reverse" : ""
                   }`}
               >
@@ -88,13 +121,15 @@ export default function Experience() {
                 <div className="hidden md:block w-1/2 px-12 text-center md:text-left">
                   <span className={`inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400 ${index % 2 === 0 ? "float-right" : "float-left"}`}>
                     <Calendar size={14} className="inline mr-2 mb-0.5" />
-                    {exp.date}
+                    {new Date(exp.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    {exp.endDate ? ` - ${new Date(exp.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}` : " - Present"}
                   </span>
                 </div>
                 {/* Mobile Date */}
                 <div className="absolute top-0 left-24 md:hidden">
                   <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
-                    {exp.date}
+                    {new Date(exp.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    {exp.endDate ? ` - ${new Date(exp.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}` : " - Present"}
                   </span>
                 </div>
               </div>

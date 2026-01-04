@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import projectReducer from "@/redux/slices/projects/projectSlice";
+import projectReducer from "@/redux/slices/projectSlice";
+import experienceReducer from "@/redux/slices/experienceSlice";
 
 export const store = configureStore({
   reducer: {
     projects: projectReducer,
+    experience: experienceReducer,
   },
 });
 

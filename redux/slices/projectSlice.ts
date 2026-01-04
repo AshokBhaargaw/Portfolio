@@ -1,16 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "@/lib/api";
-
-export type Project = {
-  _id: string;
-  title: string;
-  techStack: string[];
-  keyFeatures: string[];
-  description: string;
-  liveUrl?: string;
-  githubUrl?: string;
-  image?: string;
-};
+import { Project } from "@/redux/types/project";
 
 type ProjectState = {
   projects: Project[];
@@ -25,7 +15,11 @@ const initialState: ProjectState = {
 };
 
 // Async thunk to fetch projects
-export const fetchProjects = createAsyncThunk<Project[], void, { rejectValue: string }>("projects/fetchProjects", async (_, { rejectWithValue }) => {
+export const fetchProjects = createAsyncThunk<
+  Project[],
+  void,
+  { rejectValue: string }
+>("projects/fetchProjects", async (_, { rejectWithValue }) => {
   try {
     return await api.get<Project[]>("/api/projects");
   } catch (error: any) {
@@ -36,7 +30,15 @@ export const fetchProjects = createAsyncThunk<Project[], void, { rejectValue: st
 // Async thunk to upload/create a project
 export const uploadProject = createAsyncThunk<
   Project,
-  { title: string; description: string; techStack: string[]; keyFeatures: string[]; liveUrl?: string; githubUrl?: string },
+  {
+    title: string;
+    description: string;
+    techStack: string[];
+    keyFeatures: string[];
+    liveUrl?: string;
+    githubUrl?: string;
+    image?: string;
+  },
   { rejectValue: string }
 >("projects/uploadProject", async (projectData, { rejectWithValue }) => {
   try {
@@ -47,7 +49,11 @@ export const uploadProject = createAsyncThunk<
 });
 
 // Async thunk to delete a project
-export const deleteProject = createAsyncThunk<string, string, { rejectValue: string }>("projects/deleteProject", async (id, { rejectWithValue }) => {
+export const deleteProject = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("projects/deleteProject", async (id, { rejectWithValue }) => {
   try {
     await api.delete(`/api/projects?id=${id}`);
     return id;
@@ -72,17 +78,8 @@ export const updateProject = createAsyncThunk<
 export const projectSlice = createSlice({
   name: "projects",
   initialState,
-  reducers: {
-    addProject: (state, action: PayloadAction<Project>) => {
-      state.projects.unshift(action.payload);
-    },
+  reducers: {},
 
-    removeProject: (state, action: PayloadAction<string>) => {
-      state.projects = state.projects.filter(
-        (project) => project._id !== action.payload
-      );
-    },
-  },
   // Fetch projects
   extraReducers: (builder) => {
     builder
@@ -118,15 +115,21 @@ export const projectSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteProject.fulfilled, (state, action: PayloadAction<string>) => {
-        state.loading = false;
-        state.projects = state.projects.filter((p) => p._id !== action.payload);
-        state.error = null;
-      })
+      .addCase(
+        deleteProject.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.loading = false;
+          state.projects = state.projects.filter(
+            (p) => p._id !== action.payload
+          );
+          state.error = null;
+        }
+      )
       .addCase(deleteProject.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to delete project";
       })
+      
       // Update project
       .addCase(updateProject.pending, (state) => {
         state.loading = true;
@@ -134,7 +137,9 @@ export const projectSlice = createSlice({
       })
       .addCase(updateProject.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.projects.findIndex((p) => p._id === action.payload._id);
+        const index = state.projects.findIndex(
+          (p) => p._id === action.payload._id
+        );
         if (index !== -1) {
           state.projects[index] = action.payload;
         }
@@ -147,5 +152,5 @@ export const projectSlice = createSlice({
   },
 });
 
-export const { addProject, removeProject } = projectSlice.actions;
+export const {} = projectSlice.actions;
 export default projectSlice.reducer;
