@@ -1,18 +1,22 @@
 // app/admin/layout.tsx
 import React from "react";
 import { Sidebar, MobileTabBar } from "./OptionBar";
+import type { NavItem } from "./OptionBar";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const navItems = [
-    { href: "/admin", label: "Overview", icon: "LayoutDashboard" as const },
-    { href: "/admin/projects", label: "Projects", icon: "FolderKanban" as const },
-    { href: "/admin/experience", label: "Experience", icon: "Briefcase" as const },
-    { href: "/admin/profile", label: "Profile",    icon: "User" } // ← Not in ICONS yet!
+
+  const navItems: NavItem[] = [
+    { href: "/admin", label: "Overview", icon: "LayoutDashboard" },
+    { href: "/admin/projects", label: "Projects", icon: "FolderKanban" },
+    { href: "/admin/experience", label: "Experience", icon: "Briefcase" },
+    { href: "/admin/social", label: "Social", icon: "Share2" },
+    { href: "/admin/profile", label: "Profile", icon: "User" },
   ];
+
 
   return (
     <div className="min-h-screen flex bg-[#0F172A] text-white">

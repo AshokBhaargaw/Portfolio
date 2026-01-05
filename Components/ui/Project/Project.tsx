@@ -12,9 +12,10 @@ interface ProjectProps {
   totalProjects: number;
   onNext?: () => void;
   onPrev?: () => void;
+  leftRight?: number;
 }
 
-export default function Project({ project, currentProject, totalProjects, onNext, onPrev, }: ProjectProps) {
+export default function Project({ project, currentProject, totalProjects, onNext, onPrev, leftRight}: ProjectProps) {
   const [showFullDesc, setShowFullDesc] = useState(false)
 
   return (

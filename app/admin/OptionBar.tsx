@@ -29,9 +29,7 @@ type Props = {
   navItems: NavItem[];
 };
 
-/* --------------------------------------------------
-   DESKTOP SIDEBAR
--------------------------------------------------- */
+/* -------------------------------------------------- DESKTOP SIDEBAR -------------------------------------------------- */
 
 export function Sidebar({ navItems }: Props) {
   const pathname = usePathname();
