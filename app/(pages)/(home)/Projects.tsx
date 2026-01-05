@@ -28,8 +28,6 @@ export default function Projects() {
 
   const project = projects[currentProject];
 
-  console.log(project)
-
   return (
     <Container className="py-20 relative">
       {/* <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10" />
@@ -68,10 +66,11 @@ export default function Projects() {
 
       {projects.length > 0 && (
         <>
-          <div className="hidden md:block">
-            <Button className="absolute top-1/2 -left-20 z-50" variant="secondary" onClick={handlePrev}> <ChevronLeft size={20} /> </Button>
-            <Button className="absolute top-1/2 -right-20 z-50" variant="secondary" onClick={handleNext}> <ChevronRight size={20} /> </Button>
-          </div>
+          {projects.length > 2 &&
+            <div className="hidden md:block">
+              <Button className="absolute top-1/2 -left-20 z-50" variant="secondary" onClick={handlePrev}> <ChevronLeft size={20} /> </Button>
+              <Button className="absolute top-1/2 -right-20 z-50" variant="secondary" onClick={handleNext}> <ChevronRight size={20} /> </Button>
+            </div>}
 
           <Project
             project={project}

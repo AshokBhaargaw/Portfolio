@@ -13,7 +13,6 @@ export default function AdminLayout({
     { href: "/admin", label: "Overview", icon: "LayoutDashboard" },
     { href: "/admin/projects", label: "Projects", icon: "FolderKanban" },
     { href: "/admin/experience", label: "Experience", icon: "Briefcase" },
-    { href: "/admin/social", label: "Social", icon: "Share2" },
     { href: "/admin/profile", label: "Profile", icon: "User" },
   ];
 
