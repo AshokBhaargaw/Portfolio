@@ -14,33 +14,31 @@ import {
 } from "recharts";
 
 export default function Charts({ data }: any) {
-  const hasData = data.daily.length > 0;
-
-  if (!hasData) {
+  if (!data.daily.length) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-10 text-center text-gray-400">
-        No analytics data yet. Visit the site to generate activity.
+      <div className="rounded-xl border border-white/10 bg-white/5 p-6 text-center text-gray-400">
+        No analytics data yet.
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+
       {/* Events Over Time */}
       <div className="lg:col-span-8">
         <Card title="Events Over Time">
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={220}>
             <LineChart
               data={data.daily.map((d: any) => ({
-                date: d._id,
+                date: d._id.slice(5), // MM-DD for mobile
                 count: d.count,
               }))}
             >
-              <XAxis dataKey="date" />
-              <YAxis />
+              <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+              <YAxis hide />
               <Tooltip />
-              <Line dataKey="count" strokeWidth={2} />
+              <Line dataKey="count" strokeWidth={2} dot />
             </LineChart>
           </ResponsiveContainer>
         </Card>
@@ -49,7 +47,7 @@ export default function Charts({ data }: any) {
       {/* Devices */}
       <div className="lg:col-span-4">
         <Card title="Devices">
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
                 data={data.devices.map((d: any) => ({
@@ -58,7 +56,8 @@ export default function Charts({ data }: any) {
                 }))}
                 dataKey="value"
                 nameKey="name"
-                outerRadius={90}
+                outerRadius={70}
+                label
               />
               <Tooltip />
             </PieChart>
@@ -66,22 +65,26 @@ export default function Charts({ data }: any) {
         </Card>
       </div>
 
-      {/* Page Views */}
+      {/* Page Views (scrollable on mobile) */}
       <div className="lg:col-span-12">
         <Card title="Page Views">
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart
-              data={data.pageViews.map((p: any) => ({
-                path: p._id,
-                count: p.count,
-              }))}
-            >
-              <XAxis dataKey="path" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="count" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="overflow-x-auto -ml-7 ">
+            <div className="min-w-[500px]">
+              <ResponsiveContainer width="100%" height={260}>
+                <BarChart
+                  data={data.pageViews.map((p: any) => ({
+                    path: p._id.replace("/", ""),
+                    count: p.count,
+                  }))}
+                >
+                  <XAxis dataKey="path" tick={{ fontSize: 10 }} />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="count" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </Card>
       </div>
 
@@ -97,8 +100,8 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-      <h2 className="mb-4 text-sm font-medium text-gray-300">
+    <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 backdrop-blur">
+      <h2 className="mb-3 text-xs sm:text-sm font-medium text-gray-300">
         {title}
       </h2>
       {children}
