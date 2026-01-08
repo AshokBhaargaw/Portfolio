@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "./ReduxProvider";
-import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,38 +19,48 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ashok Bhaargaw",
   description: "Ashok Bhaargaw website",
-  verification: { google: "v_98gh4pRjHvWUaAuJZoqdtdzq8TQ8xhlnsU4sasX4k", },
+  verification: {
+    google: "v_98gh4pRjHvWUaAuJZoqdtdzq8TQ8xhlnsU4sasX4k",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <head >
-        {/* Google tag (gtag.js) */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XRN63ESXVV"></Script>
-        <Script>{
-          `window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XRN63ESXVV"
+          strategy="afterInteractive"
+        />
 
-          gtag('config', 'G-XRN63ESXVV');`
-        }
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XRN63ESXVV', {
+              page_path: window.location.pathname,
+            });
+          `}
         </Script>
-        <Analytics />
       </head>
-      <ReduxProvider>
-        <body
-          cz-shortcut-listen="true"
-          className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-screen min-h-screen flex-col justify-between`}
-        >
-          <SpeedInsights />
+
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+      >
+        <ReduxProvider>
           {children}
-        </body>
-      </ReduxProvider>
+        </ReduxProvider>
+
+        {/* Vercel tools should be in body */}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
