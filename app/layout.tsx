@@ -47,6 +47,7 @@ export default function RootLayout({
           cz-shortcut-listen="true"
           className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-screen min-h-screen flex-col justify-between`}
         >
+          <SpeedInsights />
           {children}
         </body>
       </ReduxProvider>
