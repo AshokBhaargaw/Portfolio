@@ -5,6 +5,7 @@ import ReduxProvider from "./ReduxProvider";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import AnalyticsTracker from "@/Components/AnalyticsTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
       <head>
@@ -54,9 +56,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <ReduxProvider>
+          <AnalyticsTracker />
           {children}
         </ReduxProvider>
-
         {/* Vercel tools should be in body */}
         <Analytics />
         <SpeedInsights />
