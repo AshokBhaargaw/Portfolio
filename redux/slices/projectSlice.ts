@@ -22,8 +22,8 @@ export const fetchProjects = createAsyncThunk<
 >("projects/fetchProjects", async (_, { rejectWithValue }) => {
   try {
     return await api.get<Project[]>("/api/projects");
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to fetch projects");
+  } catch (error: unknown) {
+    return rejectWithValue((error as Error).message || "Failed to fetch projects");
   }
 });
 
@@ -43,8 +43,8 @@ export const uploadProject = createAsyncThunk<
 >("projects/uploadProject", async (projectData, { rejectWithValue }) => {
   try {
     return await api.post<Project>("/api/projects", projectData);
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to create project");
+  } catch (error: unknown) {
+    return rejectWithValue((error as Error).message || "Failed to create project");
   }
 });
 
@@ -57,8 +57,8 @@ export const deleteProject = createAsyncThunk<
   try {
     await api.delete(`/api/projects?id=${id}`);
     return id;
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to delete project");
+  } catch (error: unknown) {
+    return rejectWithValue((error as Error).message || "Failed to delete project");
   }
 });
 
@@ -70,8 +70,8 @@ export const updateProject = createAsyncThunk<
 >("projects/updateProject", async ({ id, data }, { rejectWithValue }) => {
   try {
     return await api.put<Project>(`/api/projects?id=${id}`, data);
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to update project");
+  } catch (error: unknown) {
+    return rejectWithValue((error as Error).message || "Failed to update project");
   }
 });
 

@@ -14,6 +14,7 @@ export default function AdminLayout({
     { href: "/admin/projects", label: "Projects", icon: "FolderKanban" },
     { href: "/admin/experience", label: "Experience", icon: "Briefcase" },
     { href: "/admin/profile", label: "Profile", icon: "User" },
+    { href: "/admin/responses", label: "Responses", icon: "MessageSquare" },
   ];
 
 

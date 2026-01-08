@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "./ReduxProvider";
 import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head />
+      <head >
+        {/* Google tag (gtag.js) */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XRN63ESXVV"></Script>
+        <Script>{
+          `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-XRN63ESXVV');`
+        }
+        </Script>
+        <Analytics />
+      </head>
       <ReduxProvider>
         <body
           cz-shortcut-listen="true"

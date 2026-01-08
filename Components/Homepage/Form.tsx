@@ -22,16 +22,25 @@ export default function Form() {
   const [btnDisabled, setBtnDisabled] = useState(false);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const SERVICE_ID = process.env.NEXT_PUBLIC_SERVICE_ID!;
-    const TEMPLATE_ID = process.env.NEXT_PUBLIC_TEMPLATE_ID!;
-    const USER_ID = process.env.NEXT_PUBLIC_USER_ID!;
+    const SERVICE_ID = process.env.NEXT_PUBLIC_SERVICE_ID;
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+    const USER_ID = process.env.NEXT_PUBLIC_USER_ID;
 
     setBtnText("Sending...");
     setBtnDisabled(true);
 
     try {
+      // Validate Environment Variables
+      if (!SERVICE_ID || !TEMPLATE_ID || !USER_ID) {
+        const missing = [];
+        if (!SERVICE_ID) missing.push("NEXT_PUBLIC_SERVICE_ID");
+        if (!TEMPLATE_ID) missing.push("NEXT_PUBLIC_TEMPLATE_ID");
+        if (!USER_ID) missing.push("NEXT_PUBLIC_USER_ID");
+        throw new Error(`Missing EmailJS environment variables: ${missing.join(", ")}`);
+      }
+
       // Save to MongoDB
-      const apiResponse = await fetch("/api/contact", {
+      const apiResponse = await fetch("/api/responses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +67,14 @@ export default function Form() {
       reset();
     } catch (error) {
       console.error("Form submission error:", error);
-      setBtnText("Failed");
+      const errorMessage = (error as Error).message;
+      if (errorMessage.includes("public key")) {
+        setBtnText("Key Error");
+      } else if (errorMessage.includes("Missing EmailJS")) {
+        setBtnText("Config Error");
+      } else {
+        setBtnText("Failed");
+      }
     } finally {
       setTimeout(() => {
         setBtnText("Submit");

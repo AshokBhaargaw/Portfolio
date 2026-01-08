@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Briefcase, Share2, User, } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Briefcase, Share2, User, MessageSquare } from "lucide-react";
 import { BiLeftArrow } from "react-icons/bi";
 
 /* -------------------------------------------------- ICON REGISTRY (KEY PART – DO NOT CHANGE) -------------------------------------------------- */
@@ -13,7 +13,8 @@ const ICONS = {
   FolderKanban: FolderKanban,
   Briefcase: Briefcase,
   Share2: Share2,
-  User: User, // ← Add this if you plan to use it
+  User: User, 
+  MessageSquare: MessageSquare,
 } as const;
 
 
@@ -33,10 +34,7 @@ type Props = {
 
 export function Sidebar({ navItems }: Props) {
   const pathname = usePathname();
-  navItems.map(item => {
-    console.log(item.icon)
-  })
-
+  
   return (
     <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-slate-900/90 border-r border-slate-800">
       <div className="w-full px-6 py-4">

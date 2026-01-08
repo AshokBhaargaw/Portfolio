@@ -33,10 +33,10 @@ export const POST = async (req: Request) => {
     });
 
     return NextResponse.json(project);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("POST /api/projects error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to create project" },
+      { error: error instanceof Error ? error.message : "Failed to create project" },
       { status: 500 }
     )
   }
@@ -55,10 +55,10 @@ export const PUT = async (req: Request) => {
     const updatedProject = await Project.findByIdAndUpdate(id, body, { new: true });
 
     return NextResponse.json(updatedProject);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("PUT /api/projects error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to update project" },
+      { error: error instanceof Error ? error.message : "Failed to update project" },
       { status: 500 }
     );
   }
@@ -76,10 +76,10 @@ export const DELETE = async (req: Request) => {
 
     await Project.findByIdAndDelete(id);
     return NextResponse.json({ message: "Project deleted successfully" });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("DELETE /api/projects error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to delete project" },
+      { error: error instanceof Error ? error.message : "Failed to delete project" },
       { status: 500 }
     );
   }

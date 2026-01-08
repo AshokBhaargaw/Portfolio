@@ -14,7 +14,6 @@ import {
   Button,
 } from "@/Components/ui";
 import Form from "../../../Components/Homepage/Form";
-import { section } from "framer-motion/client";
 import Link from "next/link";
 
 export default function Contact() {
