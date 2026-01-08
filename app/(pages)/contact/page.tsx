@@ -3,8 +3,8 @@ import Contact from './Contact'
 
 export default function page() {
   return (
-    <div>
-        <Contact />
+    <div className='flex justify-center items-center min-h-screen md:pt-30 '>
+      <Contact />
     </div>
   )
 }

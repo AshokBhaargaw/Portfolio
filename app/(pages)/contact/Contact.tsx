@@ -51,7 +51,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" >
+    <section id="contact" className="w-screen" >
       <Container className="min-h-screen md:px-4 ">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           {/* Left: Contact Info */}

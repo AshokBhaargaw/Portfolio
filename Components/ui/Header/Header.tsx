@@ -25,7 +25,7 @@ export default function Header() {
   const navLinks = [
     { icon: Home, title: "Home", link: "/" },
     { icon: Briefcase, title: "Portfolio", link: "/portfolio" },
-    { icon: Phone, title: "Contact", link: "/#contact" },
+    { icon: Phone, title: "Contact", link: "/contact" },
   ];
 
   const socialLinks = [
