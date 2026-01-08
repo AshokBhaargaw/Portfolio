@@ -2,7 +2,7 @@
 
 import { Container, Button, Heading, Project } from "@/Components/ui";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Loader2, AlertCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@/redux/store";
 import { fetchProjects } from "@/redux/slices/projectSlice";

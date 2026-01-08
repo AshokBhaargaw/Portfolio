@@ -77,6 +77,7 @@ export default function Portfolio() {
                                 onNext={handleNext}
                                 onPrev={handlePrev}
                                 totalProjects={projects.length}
+                                showMobileNav={false}
                             />
                         </section>
                     ))}

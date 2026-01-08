@@ -24,6 +24,7 @@ interface ProjectProps {
   onNext?: () => void;
   onPrev?: () => void;
   leftRight?: number;
+  showMobileNav?: boolean;
 }
 
 export default function Project({
@@ -33,12 +34,13 @@ export default function Project({
   onNext,
   onPrev,
   leftRight,
+  showMobileNav = true,
 }: ProjectProps) {
   const [showFullDesc, setShowFullDesc] = useState(false);
-
+  console.log(showMobileNav);
   return (
     <div
-      className={`flex flex-col items-center gap-12 xl:gap-20 lg:flex-row ${"" }`}
+      className={`flex flex-col items-center my-20 gap-12 xl:gap-20 ${leftRight ? leftRight % 2 ? "lg:flex-row-reverse": "lg:flex-row" : "lg:flex-row"}`}
     >
       {/* Left: Laptop Preview */}
       <div className="w-full xl:w-3/5 flex justify-center">
@@ -156,26 +158,30 @@ export default function Project({
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex sm:hidden justify-center items-center gap-4 pt-6">
-          <button onClick={onPrev} disabled={!onPrev}>
-            <ChevronLeft size={28} />
-          </button>
+        {showMobileNav && (
+          <div className="flex sm:hidden justify-center items-center gap-4 pt-6">
+            <button onClick={onPrev} disabled={!onPrev}>
+              <ChevronLeft size={28} />
+            </button>
 
-          <div className="flex gap-1">
-            {Array.from({ length: totalProjects }).map((_, idx) => (
-              <span
-                key={idx}
-                className={`h-2 rounded-full transition-all ${
-                  idx === currentProject ? "w-6 bg-primary" : "w-2 bg-gray-600"
-                }`}
-              />
-            ))}
+            <div className="flex gap-1">
+              {Array.from({ length: totalProjects }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`h-2 rounded-full transition-all ${
+                    idx === currentProject
+                      ? "w-6 bg-primary"
+                      : "w-2 bg-gray-600"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button onClick={onNext} disabled={!onNext}>
+              <ChevronRight size={28} />
+            </button>
           </div>
-
-          <button onClick={onNext} disabled={!onNext}>
-            <ChevronRight size={28} />
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
