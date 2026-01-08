@@ -37,7 +37,9 @@ export default function Project({
   const [showFullDesc, setShowFullDesc] = useState(false);
 
   return (
-    <div className="flex flex-col items-center gap-12 xl:gap-20 lg:flex-row">
+    <div
+      className={`flex flex-col items-center gap-12 xl:gap-20 lg:flex-row ${"" }`}
+    >
       {/* Left: Laptop Preview */}
       <div className="w-full xl:w-3/5 flex justify-center">
         <div className="relative w-full max-w-[800px] group">
@@ -99,7 +101,7 @@ export default function Project({
             <Layers size={16} /> Tech Stack
           </div>
 
-          <div className="w-full overflow-hidden mt-2">
+          <div className="w-full max-w-[80vw] overflow-hidden mt-2">
             <Swiper
               spaceBetween={4.5}
               slidesPerView="auto"
@@ -107,7 +109,7 @@ export default function Project({
             >
               {project.techStack.map((tech) => (
                 <SwiperSlide key={tech} className="w-auto!">
-                  <span className="px-2 py-0.5 text-sm rounded-full bg-surface border whitespace-nowrap">
+                  <span className="px-2 py-0.5 text-sm rounded-full bg-surface border whitespace-nowrap cursor-grab">
                     {tech}
                   </span>
                 </SwiperSlide>
