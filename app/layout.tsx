@@ -4,6 +4,7 @@ import "./globals.css";
 import ReduxProvider from "./ReduxProvider";
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
