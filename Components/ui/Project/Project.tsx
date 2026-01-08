@@ -1,10 +1,21 @@
-"use client"
+"use client";
 
-import { CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ExternalLink, Github, Layers, } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  ExternalLink,
+  Github,
+  Layers,
+} from "lucide-react";
 import Image from "next/image";
 import Button from "../Buttons/Button";
-import type { Project } from '@/redux/types/project'
+import type { Project } from "@/redux/types/project";
 import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 interface ProjectProps {
   project: Project;
@@ -15,8 +26,15 @@ interface ProjectProps {
   leftRight?: number;
 }
 
-export default function Project({ project, currentProject, totalProjects, onNext, onPrev, leftRight}: ProjectProps) {
-  const [showFullDesc, setShowFullDesc] = useState(false)
+export default function Project({
+  project,
+  currentProject,
+  totalProjects,
+  onNext,
+  onPrev,
+  leftRight,
+}: ProjectProps) {
+  const [showFullDesc, setShowFullDesc] = useState(false);
 
   return (
     <div className="flex flex-col items-center gap-12 xl:gap-20 lg:flex-row">
@@ -50,37 +68,51 @@ export default function Project({ project, currentProject, totalProjects, onNext
 
       {/* Right: Details */}
       <div className="w-full xl:w-2/5 flex flex-col gap-6">
-        <h3 className="text-3xl md:text-4xl font-bold">
-          {project.title}
-        </h3>
+        <h3 className="text-3xl md:text-4xl font-bold">{project.title}</h3>
 
         <div className="flex">
-          <p className={`text-muted-foreground text-base sm:text-lg ${!showFullDesc && "md:line-clamp-3 line-clamp-4"} `}>
+          <p
+            className={`text-muted-foreground text-base sm:text-lg ${
+              !showFullDesc && "md:line-clamp-3 line-clamp-4"
+            } `}
+          >
             {project.description}
           </p>
-          {
-            showFullDesc ?
-              <ChevronUp onClick={() => setShowFullDesc(false)} className="place-self-end h-full mb-3 cursor-pointer" size={80} />
-              :
-              <ChevronDown onClick={() => setShowFullDesc(true)} className="place-self-end h-full mb-3 cursor-pointer" size={80} />
-          }
+          {showFullDesc ? (
+            <ChevronUp
+              onClick={() => setShowFullDesc(false)}
+              className="place-self-end h-full mb-3 cursor-pointer"
+              size={80}
+            />
+          ) : (
+            <ChevronDown
+              onClick={() => setShowFullDesc(true)}
+              className="place-self-end h-full mb-3 cursor-pointer"
+              size={80}
+            />
+          )}
         </div>
-
 
         {/* Tech Stack */}
         <div>
           <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase">
             <Layers size={16} /> Tech Stack
           </div>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {project.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-0.5 text-sm rounded-full bg-surface border"
-              >
-                {tech}
-              </span>
-            ))}
+
+          <div className="w-full overflow-hidden mt-2">
+            <Swiper
+              spaceBetween={4.5}
+              slidesPerView="auto"
+              className="overflow-visible!"
+            >
+              {project.techStack.map((tech) => (
+                <SwiperSlide key={tech} className="w-auto!">
+                  <span className="px-2 py-0.5 text-sm rounded-full bg-surface border whitespace-nowrap">
+                    {tech}
+                  </span>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
 
@@ -101,11 +133,7 @@ export default function Project({ project, currentProject, totalProjects, onNext
         {/* CTA */}
         <div className="flex gap-4 pt-4">
           {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               <Button className="gap-2">
                 Live Demo <ExternalLink size={16} />
               </Button>
@@ -135,10 +163,9 @@ export default function Project({ project, currentProject, totalProjects, onNext
             {Array.from({ length: totalProjects }).map((_, idx) => (
               <span
                 key={idx}
-                className={`h-2 rounded-full transition-all ${idx === currentProject
-                  ? "w-6 bg-primary"
-                  : "w-2 bg-gray-600"
-                  }`}
+                className={`h-2 rounded-full transition-all ${
+                  idx === currentProject ? "w-6 bg-primary" : "w-2 bg-gray-600"
+                }`}
               />
             ))}
           </div>
