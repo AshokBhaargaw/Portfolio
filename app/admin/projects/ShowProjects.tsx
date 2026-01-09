@@ -231,7 +231,7 @@ export default function ShowProjects() {
                                   <Check className="w-4 h-4" />
                                 </button>
                               </div>
-                              <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-2 custom-scrollbar">
+                              <div className="flex flex-wrap gap-1.5 h-24 overflow-y-auto pr-2 custom-scrollbar">
                                 {editForm.techStack?.map((tech, i) => (
                                   <span key={i} className="flex items-center gap-1.5 bg-purple-500/10 text-purple-300 text-[10px] px-2.5 py-1 rounded-md border border-purple-500/20">
                                     {tech}
@@ -256,7 +256,7 @@ export default function ShowProjects() {
                                   <Check className="w-4 h-4" />
                                 </button>
                               </div>
-                              <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-2 custom-scrollbar">
+                              <div className="flex flex-wrap gap-1.5 overflow-y-auto pr-2 custom-scrollbar">
                                 {editForm.keyFeatures?.map((feature: string, i: number) => (
                                   <span key={feature} className="flex items-center gap-1.5 bg-blue-500/10 text-blue-300 text-[10px] px-2.5 py-1 rounded-md border border-blue-500/20">
                                     {feature}
