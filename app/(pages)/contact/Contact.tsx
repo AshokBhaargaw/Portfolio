@@ -13,14 +13,14 @@ import {
   ContactInfoCard,
   Button,
 } from "@/Components/ui";
-import Form from "../../../Components/Homepage/Form";
+import Form from "./Form";
 import Link from "next/link";
 
 export default function Contact() {
   const socialLinks = [
     {
       name: "WhatsApp",
-      link: "http://wa.me/7014372575",
+      link: "https://wa.me/917014372575?text=Hi%20Ashok,%0AI%20reviewed%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding%20a%20developer%20role%20/%20opportunity.%0ALooking%20forward%20to%20your%20response.",
       icon: <FaWhatsapp />,
     },
     {
@@ -45,13 +45,13 @@ export default function Contact() {
     },
     {
       name: "Instagram",
-      link: "https://www.instagram.com/dev.ashokbhaargaw/",
+      link: "https://www.instagram.com/ashokbhaargaw.dev/",
       icon: <FaInstagram />,
     },
   ];
 
   return (
-    <section id="contact" className="w-screen" >
+    <section id="contact" className="" >
       <Container className="min-h-screen md:px-4 ">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           {/* Left: Contact Info */}

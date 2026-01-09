@@ -12,7 +12,7 @@ import {
   Heading,
   ContactInfoCard,
 } from "@/Components/ui";
-import Form from "./Form";
+import Form from "../../app/(pages)/contact/Form";
 
 export default function Contact() {
   const socialLinks = [

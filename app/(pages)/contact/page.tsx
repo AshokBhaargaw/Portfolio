@@ -3,7 +3,7 @@ import Contact from './Contact'
 
 export default function page() {
   return (
-    <div className='flex justify-center items-center min-h-screen md:pt-30 '>
+    <div className='flex flex-col justify-center min-h-screen md:pt-30 '>
       <Contact />
     </div>
   )
