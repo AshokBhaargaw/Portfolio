@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@/Components/ui";
 import React from "react";
+import TabBar from "@/Components/ui/TabBar/TabBar";
 
 export const metadata: Metadata = {
   title: "Ashok Bhaargaw | Frontend Developer",
@@ -25,6 +26,7 @@ export default function RootLayout({
 
       {/* Footer semantic landmark */}
       <Footer />
+      <TabBar/>
     </>
   );
 }
