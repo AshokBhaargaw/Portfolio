@@ -84,7 +84,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-background/50 p-1 rounded-full border border-white/5">
+        <nav aria-label="Primary Navigation" className="hidden md:flex items-center gap-1 bg-background/50 p-1 rounded-full border border-white/5">
           {navLinks.map((nav) => {
             const isActive = pathname === nav.link;
             return (

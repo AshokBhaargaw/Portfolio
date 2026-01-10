@@ -18,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ashok Bhaargaw",
-  description: "Ashok Bhaargaw website",
+  title: "Ashok Bhaargaw | Frontend Developer Portfolio",
+  description:
+    "Frontend Developer specializing in React, Next.js, Tailwind CSS, and modern web technologies. Explore projects, skills, and professional experience.",
   verification: {
     google: "v_98gh4pRjHvWUaAuJZoqdtdzq8TQ8xhlnsU4sasX4k",
   },
@@ -30,7 +31,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <head>

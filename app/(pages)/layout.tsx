@@ -1,17 +1,30 @@
-import Contact from "@/app/(pages)/contact/Contact";
-import { Footer, Header } from "@/Components/ui";
+import type { Metadata } from "next";
+import { Header, Footer } from "@/Components/ui";
 import React from "react";
 
+export const metadata: Metadata = {
+  title: "Ashok Bhaargaw | Frontend Developer",
+  description:
+    "Frontend Developer specializing in React, Next.js, Tailwind CSS, and modern web development. Explore projects, skills, and contact details.",
+};
+
 export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <>
-            <Header />
-            {children}
-            <Footer />
-        </>
-    );
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      {/* Header should contain <nav> internally */}
+      <Header />
+
+      {/* Main content area (VERY IMPORTANT FOR SEO) */}
+      <main id="main-content" role="main">
+        {children}
+      </main>
+
+      {/* Footer semantic landmark */}
+      <Footer />
+    </>
+  );
 }
