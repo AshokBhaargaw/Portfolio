@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import {
   Github,
@@ -34,6 +34,27 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const socialRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        socialRef.current &&
+        !socialRef.current.contains(event.target as Node)
+      ) {
+        setShowSocial(false);
+      }
+    };
+
+    if (showSocial) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSocial]);
+
   const navLinks = [
     { icon: Home, title: "Home", link: "/" },
     { icon: Briefcase, title: "Portfolio", link: "/portfolio" },
@@ -64,7 +85,7 @@ export default function Header() {
     {
       title: "Facebook",
       icon: Facebook,
-      link: "https://www.Facebook.com/ashokbhaargaw/",
+      link: "https://www.Facebook.com/ashokbhaargaw.dev/",
     },
   ];
 
@@ -170,7 +191,10 @@ export default function Header() {
         {/* Mobile Social Links */}
 
         {showSocial && (
-          <div className="flex absolute right-2 min-w-40 justify-start  top-15 bg-black rounded-2xl p-2 flex-col md:hidden items-center gap-3">
+          <div
+            ref={socialRef}
+            className="flex absolute right-2 min-w-40 justify-start  top-15 bg-black rounded-2xl p-2 flex-col md:hidden items-center gap-3"
+          >
             {socialLinks.map((social) => (
               <a
                 key={social.title}
