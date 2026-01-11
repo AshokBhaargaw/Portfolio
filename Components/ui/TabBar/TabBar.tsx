@@ -49,9 +49,9 @@ export default function TabBar() {
         <a href="tel:+917014137575" className="ml-2">
           <Button
             variant="primary"
-            className="h-12 min-w-28 text-sm group text-md"
+            className="h-12 min-w-30 text-sm group text-md"
           >
-            Hire Me
+            Call Now
             <ArrowUpRight
               size={16}
               className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

@@ -86,13 +86,13 @@ export default function Experience() {
                   }`}
               >
                 {/* Content Side */}
-                <div className="w-full md:w-1/2 pl-20 md:pl-0 md:px-12">
+                <div className="w-full md:w-1/2 pl-15 md:pl-0 md:px-12">
                   <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, type: "spring" }}
                     viewport={{ once: true, amount: 0.3 }}
-                    className={`p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300 group ${index % 2 === 0 ? "text-right items-end" : "text-left items-start"} flex flex-col`}
+                    className={`p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300 group ${index % 2 === 0 ? "md:text-right md:items-end" : "md:text-left md:items-start"} flex flex-col`}
                   >
                     <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{exp.company}</h3>
                     <h4 className="text-lg font-semibold text-primary/80 mb-4 flex items-center gap-2 w-full justify-start md:justify-center lg:justify-start">
@@ -126,8 +126,8 @@ export default function Experience() {
                   </span>
                 </div>
                 {/* Mobile Date */}
-                <div className="absolute top-0 left-24 md:hidden">
-                  <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+                <div className="absolute -top-3 left-24 md:hidden">
+                  <span className="inline-block py-1 px-3 rounded-full bg-black/40 border border-white/10 text-xs text-gray-400">
                     {new Date(exp.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                     {exp.endDate ? ` - ${new Date(exp.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}` : " - Present"}
                   </span>

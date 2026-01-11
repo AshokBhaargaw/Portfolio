@@ -171,7 +171,7 @@ export default function Header() {
             className="w-full flex items-center justify-center"
           >
             <Button variant="primary" className="h-9 px-6 text-sm group">
-              Hire Me
+              Call Now
               <ArrowUpRight
                 size={16}
                 className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

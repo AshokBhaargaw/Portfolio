@@ -35,7 +35,7 @@ export default function Skillbar() {
 
   const skillsData: SkillCategory[] = [
     {
-      category: "Frontend Skills",
+      category: "Frontend",
       items: [
         { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
         { name: "CSS3", icon: SiCss3, color: "#1572B6" },
