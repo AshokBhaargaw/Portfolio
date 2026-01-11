@@ -23,7 +23,7 @@ export default function HeroSection() {
       href: "https://linkedin.com/in/ashokbhaargaw",
       label: "LinkedIn",
     },
-    { icon: Mail, href: "mailto:ashok@example.com", label: "Email" }, // Placeholder, can be updated by user
+    { icon: Mail, href: "mailto:ashokbhaargaw@gmail.com", label: "Email" }, // Placeholder, can be updated by user
   ];
 
   return (
@@ -53,13 +53,31 @@ export default function HeroSection() {
             </Heading>
 
             <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0 mb-8">
-              I build fast, interactive web applications that users love. With{" "}
-              <span className="text-foreground font-semibold">2+ years</span> of
-              WordPress experience, I’ve transitioned to modern{" "}
               <span className="text-foreground font-semibold">
-                React & Next.js
+                Full Stack Developer {" "}
+              </span>
+              focused on building scalable and{" "}
+              <span className="text-foreground font-semibold">
+                high-performance
               </span>{" "}
-              development to create scalable, high-performance solutions.
+              web applications using{" "}
+              <span className="text-foreground font-semibold">Next.js</span> on
+              the frontend and{" "}
+              <span className="text-foreground font-semibold">NestJS</span> on
+              the backend, with experience in{" "}
+              <span className="text-foreground font-semibold">MongoDB</span> and{" "}
+              <span className="text-foreground font-semibold">PostgreSQL</span>,
+              and a strong focus on{" "}
+              <span className="text-foreground font-semibold">
+                clean architecture
+              </span>
+              ,{" "}
+              <span className="text-foreground font-semibold">API design</span>,
+              and{" "}
+              <span className="text-foreground font-semibold">
+                end-to-end development
+              </span>
+              .
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start mb-10">
@@ -145,9 +163,9 @@ export default function HeroSection() {
                 <p className="text-muted-foreground text-sm">
                   Full Stack Developer
                 </p>
-                <h3 className="text-2xl my-1 font-bold text-foreground">
+                <h1 className="text-2xl my-1 font-bold text-foreground">
                   Ashok Bhaargaw
-                </h3>
+                </h1>
                 <div className="flex gap-1 md:gap-2 mt-2 flex-wrap justify-center">
                   {/* 
 ------------------ Colors for the future ------------------

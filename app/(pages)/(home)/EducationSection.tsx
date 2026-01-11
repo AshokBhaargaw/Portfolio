@@ -57,10 +57,10 @@ export default function EducationSection() {
           {/* Vertical Line */}
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-primary/50 to-primary mb-6" />
 
-          <h2 className="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold text-white/90">
+          <h3 className="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold text-white/90">
             <Award className="w-6 h-6 text-primary" />
             Academic Journey
-          </h2>
+          </h3>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
