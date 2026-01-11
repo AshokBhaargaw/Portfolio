@@ -21,8 +21,34 @@ export const metadata: Metadata = {
   title: "Ashok Bhaargaw | Frontend Developer Portfolio",
   description:
     "Frontend Developer specializing in React, Next.js, Tailwind CSS, and modern web technologies. Explore projects, skills, and professional experience.",
+
   verification: {
     google: "v_98gh4pRjHvWUaAuJZoqdtdzq8TQ8xhlnsU4sasX4k",
+  },
+
+  openGraph: {
+    title: "Ashok Bhaargaw | Frontend Developer",
+    description:
+      "I build fast, modern, SEO-friendly web applications using React and Next.js.",
+    url: "https://ashokbhaargaw.vercel.app",
+    siteName: "Ashok Bhaargaw",
+    images: [
+      {
+        url: "https://ashokbhaargaw.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ashok Bhaargaw – Frontend Developer Portfolio",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Ashok Bhaargaw | Frontend Developer",
+    description:
+      "Frontend Developer building fast and modern web applications with React & Next.js.",
+    images: ["https://ashokbhaargaw.vercel.app/og-image.png"],
   },
 };
 
