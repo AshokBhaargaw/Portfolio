@@ -138,7 +138,7 @@ export default function Project({
         <div className="flex gap-4 pt-4">
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              <Button className="gap-2">
+              <Button className="px-4! md:px-auto! gap-1 md:gap-2">
                 Live Demo <ExternalLink size={16} />
               </Button>
             </a>
@@ -150,7 +150,7 @@ export default function Project({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="secondary" className="gap-2">
+              <Button variant="secondary" className="px-4! md:px-auto! gap-1 md:gap-1">
                 <Github size={18} /> Source Code
               </Button>
             </a>
