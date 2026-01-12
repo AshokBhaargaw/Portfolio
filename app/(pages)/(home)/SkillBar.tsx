@@ -1,80 +1,10 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import {
-  SiAdobephotoshop,
-  SiCss3,
-  SiFigma,
-  SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
-  SiNextdotjs,
-  SiReact,
-  SiReplit,
-  SiTypescript,
-  SiWordpress,
-} from "react-icons/si";
-import { VscVscode } from "react-icons/vsc";
-import { CursorIcon } from "../../../Components/Icons/CursorIcon";
-import { AntigravityIcon } from "../../../Components/Icons/AntigravityIcon";
-
-type Skill = {
-  name: string;
-  icon: React.ElementType;
-  color: string;
-};
-
-type SkillCategory = {
-  category: string;
-  items: Skill[];
-};
+import { skillsData, } from "@/Data/Skills";
 
 export default function Skillbar() {
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  const skillsData: SkillCategory[] = [
-    {
-      category: "Frontend",
-      items: [
-        { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
-        { name: "CSS3", icon: SiCss3, color: "#1572B6" },
-        { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-        { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-        { name: "React.js", icon: SiReact, color: "#61DAFB" },
-        { name: "Next.js", icon: SiNextdotjs, color: "#fff" },
-      ],
-    },
-    {
-      category: "UI Skills",
-      items: [
-        { name: "Photoshop", icon: SiAdobephotoshop, color: "#31A8FF" },
-        { name: "Figma", icon: SiFigma, color: "#F24E1E" },
-      ],
-    },
-    {
-      category: "CMS",
-      items: [
-        { name: "WordPress", icon: SiWordpress, color: "#21759B" },
-      ],
-    },
-    {
-      category: "Collabration",
-      items: [
-        { name: "Git", icon: SiGit, color: "#007ACC" },
-        { name: "GitHub", icon: SiGithub, color: "#007ACC" },
-      ],
-    },
-    {
-      category: "IDEs",
-      items: [
-        { name: "VS Code", icon: VscVscode, color: "#007ACC" },
-        { name: "Cursor", icon: CursorIcon, color: "#F0F0F0" },
-        { name: "Replit", icon: SiReplit, color: "#F26207" },
-        { name: "Anti Gravity", icon: AntigravityIcon, color: "#fff" },
-      ],
-    },
-  ];
 
   // Clone data for infinite scroll effect
   const infiniteSkills = [...skillsData, ...skillsData];
@@ -84,49 +14,92 @@ export default function Skillbar() {
     if (!scrollContainer) return;
 
     let animationFrameId: number;
-    // Speed: pixels per frame. Adjust for desired smoothness/speed.
+    let isPaused = false;
     const speed = 0.5;
 
+    // Auto-scroll logic
     const scroll = () => {
-      if (scrollContainer) {
-        // If we've scrolled past the first set of data (approx half width), reset to 0
-        // We verify this by checking scrollWidth/2. 
-        // Note: precise calculation is better, but this simple check works for identical content.
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0;
-        } else {
-          scrollContainer.scrollLeft += speed;
-        }
+      if (scrollContainer && !isPaused) {
+        scrollContainer.scrollLeft += speed;
       }
       animationFrameId = requestAnimationFrame(scroll);
     };
 
+    // Central boundary check for infinite effect
+    const handleScrollBoundary = () => {
+      if (!scrollContainer) return;
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+        scrollContainer.scrollLeft = 1;
+      } else if (scrollContainer.scrollLeft <= 0) {
+        scrollContainer.scrollLeft = scrollContainer.scrollWidth / 2 - 1;
+      }
+    };
+
+    // Drag-to-scroll logic
+    let isDragging = false;
+    let startX: number;
+    let scrollLeft: number;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging = true;
+      isPaused = true;
+      scrollContainer.classList.add("dragging");
+      startX = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      isPaused = false;
+      scrollContainer.classList.remove("dragging");
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - scrollContainer.offsetLeft;
+      const walk = x - startX;
+      scrollContainer.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseEnter = () => (isPaused = true);
+    const handleMouseLeave = () => {
+      if (!isDragging) isPaused = false;
+    };
+
+    scrollContainer.addEventListener("scroll", handleScrollBoundary);
+    scrollContainer.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mousemove", handleMouseMove);
+    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
+    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+
     animationFrameId = requestAnimationFrame(scroll);
 
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      scrollContainer.removeEventListener("scroll", handleScrollBoundary);
+      scrollContainer.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
+      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
-
 
   return (
     <div className="py-5 overflow-hidden relative">
-      {/* Gradient Masks */}
-      {/* <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-24 z-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-24 z-20 bg-gradient-to-l from-background to-transparent pointer-events-none" /> */}
-
-      {/* 
-        Scroll Container
-        overflow-x-auto allows 'sticky' children to work.
-        no-scrollbar utility (if exists) or inline style to hide scrollbar.
-       */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto pb-4 no-scrollbar"
+        className="flex overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing select-none"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div className="flex shrink-0 gap-10 pl-4">
           {infiniteSkills.map((categoryData, index) => (
-            <div key={`${categoryData.category}-${index}`} className="flex items-center gap-6 p-2 rounded-2xl border border-border/30 bg-secondary/5 backdrop-blur-sm">
-
+            <div
+              key={`${categoryData.category}-${index}`}
+              className="flex items-center gap-6 p-2 rounded-2xl border border-border/30 bg-secondary/5 backdrop-blur-sm"
+            >
               {/* Sticky Category Label */}
               <div className="sticky left-0 z-10 px-4 py-2 bg-background/80 backdrop-blur-md rounded-lg border-r border-primary/20 shadow-sm">
                 <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary whitespace-nowrap">

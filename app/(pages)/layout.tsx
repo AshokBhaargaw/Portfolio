@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Frontend Developer specializing in React, Next.js, Tailwind CSS, and modern web development. Explore projects, skills, and contact details.",
 };
 
-export default function RootLayout({
+export default function PageLayout({
   children,
 }: {
   children: React.ReactNode;
