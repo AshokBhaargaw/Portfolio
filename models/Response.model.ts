@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 if (mongoose.models.Response) {
   delete mongoose.models.Response;
-  console.log("Deleted cached Response model");
 }
 
 const ResponseSchema = new mongoose.Schema(

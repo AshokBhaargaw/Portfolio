@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { Home, Briefcase, Phone, ArrowUpRight } from "lucide-react";
 import Button from "../Buttons/Button";
 import clsx from "clsx";
+import "./TabBar.css";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { icon: Home, title: "Home", href: "/" },
@@ -13,6 +15,17 @@ const navLinks = [
 ];
 
 export default function TabBar() {
+  const [shake, setShake] = useState(true);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShake(true);
+      setTimeout(() => {
+        setShake(false);
+      }, 4000);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   const pathname = usePathname();
 
   return (
@@ -46,7 +59,10 @@ export default function TabBar() {
         </div>
 
         {/* Hire Me CTA */}
-        <a href="tel:+917014137575" className="ml-2">
+        <a
+          href="tel:+917014137575"
+          className={`ml-2 ${shake && "animate-shake"}`}
+        >
           <Button
             variant="primary"
             className="h-12 min-w-30 text-sm group text-md"

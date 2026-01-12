@@ -108,9 +108,6 @@ export default function AddProjects() {
     }
   };
 
-
-  console.log(imageUrl)
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

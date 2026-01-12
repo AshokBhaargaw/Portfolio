@@ -37,7 +37,6 @@ export default function Project({
   showMobileNav = true,
 }: ProjectProps) {
   const [showFullDesc, setShowFullDesc] = useState(false);
-  console.log(showMobileNav);
   return (
     <div
       className={`flex flex-col items-center my-20 gap-12 xl:gap-20 ${leftRight ? leftRight % 2 ? "lg:flex-row-reverse": "lg:flex-row" : "lg:flex-row"}`}
