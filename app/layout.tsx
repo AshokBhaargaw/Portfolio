@@ -25,7 +25,9 @@ export const metadata: Metadata = {
   verification: {
     google: "v_98gh4pRjHvWUaAuJZoqdtdzq8TQ8xhlnsU4sasX4k",
   },
-
+ icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: "Ashok Bhaargaw | Frontend Developer",
     description:
