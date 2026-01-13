@@ -21,7 +21,7 @@ export default function TabBar() {
       setShake(true);
       setTimeout(() => {
         setShake(false);
-      }, 4000);
+      }, 600);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
