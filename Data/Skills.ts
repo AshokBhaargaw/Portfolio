@@ -8,6 +8,8 @@ import {
   SiGithub,
   SiHtml5,
   SiJavascript,
+  SiMongodb,
+  SiNestjs,
   SiNextdotjs,
   SiReact,
   SiReplit,
@@ -18,6 +20,7 @@ import { VscVscode } from "react-icons/vsc";
 import { CursorIcon } from "@/Components/Icons/CursorIcon";
 import { AntigravityIcon } from "@/Components/Icons/AntigravityIcon";
 import { TbBrandReactNative } from "react-icons/tb";
+import { BiLogoPostgresql } from "react-icons/bi";
 
 export type Skill = {
   name: string;
@@ -40,6 +43,28 @@ export const skillsData: SkillCategory[] = [
       { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
       { name: "React.js", icon: SiReact, color: "#61DAFB" },
       { name: "Next.js", icon: SiNextdotjs, color: "#fff" },
+    ],
+  },
+  {
+    category: "Backend",
+    items: [
+      { name: "Next.js", icon: SiNextdotjs, color: "#fff" },
+      { name: "Nest Js", icon: SiNestjs, color: "#ff0000" },
+      { name: "PostgreSQL", icon: BiLogoPostgresql, color: "#336791" },
+      { name: "MongoDB", icon: SiMongodb, color: "#00ED64" },
+
+    ],
+  },
+  {
+    category: "Mobile App",
+    items: [
+      { name: "React Native", icon: TbBrandReactNative, color: "#61DAFB" },
+    ],
+  },
+  {
+    category: "Mobile App",
+    items: [
+      { name: "React Native", icon: TbBrandReactNative, color: "#61DAFB" },
     ],
   },
   {
