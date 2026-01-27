@@ -68,12 +68,6 @@ export const skillsData: SkillCategory[] = [
     ],
   },
   {
-    category: "Mobile App",
-    items: [
-      { name: "React Native", icon: TbBrandReactNative, color: "#61DAFB" },
-    ],
-  },
-  {
     category: "BaaS",
     items: [
       { name: "AppWrite", icon: SiAppwrite, color: "#FD366E" },

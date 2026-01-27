@@ -24,14 +24,9 @@ export default function Contact() {
       icon: <FaWhatsapp />,
     },
     {
-      name: "Twitter",
-      link: "https://www.twitter.com/ashokbhaargaw/",
-      icon: <FaTwitter />,
-    },
-    {
-      name: "Facebook",
-      link: "https://www.facebook.com/ashokbhaargaw/",
-      icon: <FaFacebook />,
+      name: "Github",
+      link: "https://github.com/AshokBhaargaw",
+      icon: <FaGithub />,
     },
     {
       name: "LinkedIn",
@@ -39,9 +34,14 @@ export default function Contact() {
       icon: <FaLinkedin />,
     },
     {
-      name: "Github",
-      link: "https://github.com/AshokBhaargaw",
-      icon: <FaGithub />,
+      name: "Twitter",
+      link: "https://www.twitter.com/ashokbhaargaw/",
+      icon: <FaTwitter />,
+    },
+    {
+      name: "Facebook",
+      link: "https://www.facebook.com/ashokbhaargw/",
+      icon: <FaFacebook />,
     },
     {
       name: "Instagram",
@@ -51,7 +51,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="" >
+    <section id="contact" className="">
       <Container className="min-h-screen md:px-4 ">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           {/* Left: Contact Info */}
@@ -64,16 +64,22 @@ export default function Contact() {
               ContactIcon={"📞"}
               ContactMode="Phone"
               ContactInfo="+91 70143 72575"
+              ContactLink={socialLinks.find((s) => s.name === "WhatsApp")?.link}
+              NewTab
             />
             <ContactInfoCard
               ContactIcon={"💌"}
               ContactMode="MAIL"
               ContactInfo="ashokbhaargaw@gmail.com"
+              ContactLink={"mailto:ashokbhaargaw@gmail.com"}
+              NewTab
             />
             <ContactInfoCard
               ContactIcon={"📍"}
               ContactMode="Location"
               ContactInfo="Ramdevra, Rajasthan"
+              ContactLink={"https://maps.app.goo.gl/kZw12TaVvBCwFTX59"}
+              NewTab
             />
 
             {/* Social Icons */}
@@ -92,9 +98,7 @@ export default function Contact() {
                 </a>
               ))}
               <Link href="tel:+917014372575">
-                <Button >
-                  Call Now
-                </Button>
+                <Button>Call Now</Button>
               </Link>
             </div>
           </div>
@@ -105,7 +109,6 @@ export default function Contact() {
               <Form />
             </Blackboard>
           </div>
-
         </div>
       </Container>
     </section>
