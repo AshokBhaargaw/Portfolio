@@ -38,16 +38,16 @@ export default function Contact() {
       link: "https://www.twitter.com/ashokbhaargaw/",
       icon: <FaTwitter />,
     },
-    {
-      name: "Facebook",
-      link: "https://www.facebook.com/ashokbhaargw/",
-      icon: <FaFacebook />,
-    },
-    {
-      name: "Instagram",
-      link: "https://www.instagram.com/ashokbhaargaw.dev/",
-      icon: <FaInstagram />,
-    },
+    // {
+    //   name: "Facebook",
+    //   link: "https://www.facebook.com/ashokbhaargw/",
+    //   icon: <FaFacebook />,
+    // },
+    // {
+    //   name: "Instagram",
+    //   link: "https://www.instagram.com/ashokbhaargaw.dev/",
+    //   icon: <FaInstagram />,
+    // },
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function Contact() {
               ContactIcon={"📞"}
               ContactMode="Phone"
               ContactInfo="+91 70143 72575"
-              ContactLink={socialLinks.find((s) => s.name === "WhatsApp")?.link}
+              ContactLink={"tel:7014372575"}
               NewTab
             />
             <ContactInfoCard

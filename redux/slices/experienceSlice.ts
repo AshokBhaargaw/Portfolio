@@ -25,8 +25,10 @@ export const fetchExperiences = createAsyncThunk<
 >("experience/fetchExperiences", async (_, { rejectWithValue }) => {
   try {
     return await api.get<Experience[]>("/api/experience");
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to fetch experiences");
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to fetch experiences";
+    return rejectWithValue(message);
   }
 });
 
@@ -38,8 +40,10 @@ export const uploadExperience = createAsyncThunk<
 >("experience/uploadExperience", async (data, { rejectWithValue }) => {
   try {
     return await api.post<Experience>("/api/experience", data);
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to upload experience");
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to upload experience";
+    return rejectWithValue(message);
   }
 });
 
@@ -51,8 +55,10 @@ export const updateExperience = createAsyncThunk<
 >("experience/updateExperience", async ({ id, data }, { rejectWithValue }) => {
   try {
     return await api.put<Experience>(`/api/experience?id=${id}`, data);
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to update experience");
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to update experience";
+    return rejectWithValue(message);
   }
 });
 
@@ -65,8 +71,10 @@ export const deleteExperience = createAsyncThunk<
   try {
     await api.delete(`/api/experience?id=${id}`);
     return id;
-  } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to delete experience");
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to delete experience";
+    return rejectWithValue(message);
   }
 });
 
@@ -94,7 +102,7 @@ export const experienceSlice = createSlice({
         (state, action: PayloadAction<Experience[]>) => {
           state.loading = false;
           state.experiences = action.payload;
-        }
+        },
       )
       .addCase(fetchExperiences.rejected, (state, action) => {
         state.loading = false;
@@ -111,7 +119,7 @@ export const experienceSlice = createSlice({
         (state, action: PayloadAction<Experience>) => {
           state.loading = false;
           state.experiences.unshift(action.payload);
-        }
+        },
       )
       .addCase(uploadExperience.rejected, (state, action) => {
         state.loading = false;
@@ -128,12 +136,12 @@ export const experienceSlice = createSlice({
         (state, action: PayloadAction<Experience>) => {
           state.loading = false;
           const index = state.experiences.findIndex(
-            (e) => e._id === action.payload._id
+            (e) => e._id === action.payload._id,
           );
           if (index !== -1) {
             state.experiences[index] = action.payload;
           }
-        }
+        },
       )
       .addCase(updateExperience.rejected, (state, action) => {
         state.loading = false;
@@ -150,9 +158,9 @@ export const experienceSlice = createSlice({
         (state, action: PayloadAction<string>) => {
           state.loading = false;
           state.experiences = state.experiences.filter(
-            (e) => e._id !== action.payload
+            (e) => e._id !== action.payload,
           );
-        }
+        },
       )
       .addCase(deleteExperience.rejected, (state, action) => {
         state.loading = false;

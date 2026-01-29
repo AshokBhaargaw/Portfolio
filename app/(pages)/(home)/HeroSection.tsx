@@ -88,7 +88,7 @@ export default function HeroSection() {
                 Contact Me
               </Button>
 
-              <a
+              {/* <a
                 href="/Ashok_Bhaargaw_Resume.pdf"
                 download
                 target="_blank"
@@ -102,7 +102,7 @@ export default function HeroSection() {
                   <FileText size={18} />
                   <span>Resume</span>
                 </Button>
-              </a>
+              </a> */}
             </div>
 
             {/* Social Links */}
