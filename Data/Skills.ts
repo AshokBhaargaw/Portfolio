@@ -46,13 +46,16 @@ export const skillsData: SkillCategory[] = [
     ],
   },
   {
+    category: "CMS",
+    items: [{ name: "WordPress", icon: SiWordpress, color: "#21759B" }],
+  },
+  {
     category: "Backend",
     items: [
       { name: "Next.js", icon: SiNextdotjs, color: "#fff" },
       { name: "Nest Js", icon: SiNestjs, color: "#ff0000" },
       { name: "PostgreSQL", icon: BiLogoPostgresql, color: "#336791" },
       { name: "MongoDB", icon: SiMongodb, color: "#00ED64" },
-
     ],
   },
   {
@@ -74,10 +77,6 @@ export const skillsData: SkillCategory[] = [
       { name: "Photoshop", icon: SiAdobephotoshop, color: "#31A8FF" },
       { name: "Figma", icon: SiFigma, color: "#F24E1E" },
     ],
-  },
-  {
-    category: "CMS",
-    items: [{ name: "WordPress", icon: SiWordpress, color: "#21759B" }],
   },
   {
     category: "Collabration",
