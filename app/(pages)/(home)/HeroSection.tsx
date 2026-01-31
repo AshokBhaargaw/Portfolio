@@ -124,7 +124,7 @@ export default function HeroSection() {
 
           {/* Right Content - Visual Profile Card */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-end z-10">
-            <div className="relative w-full max-w-md aspect-square md:aspect-auto md:h-[500px] flex items-center justify-center">
+            <div className="relative w-full max-w-md aspect-square md:aspect-auto md:h-125 flex items-center justify-center">
               {/* Decorative Floating Elements */}
               <div
                 className="absolute top-10 left-0 p-3 bg-card/80 backdrop-blur-md border border-border rounded-xl shadow-xl animate-float"

@@ -43,17 +43,17 @@ export default function Project({
     >
       {/* Left: Laptop Preview */}
       <div className="w-full xl:w-3/5 flex justify-center">
-        <div className="relative w-full max-w-[800px] group">
+        <div className="relative w-full max-w-200 group">
           <Image
             src="/laptop.png"
             alt="Laptop frame"
             width={1600}
             height={1000}
-            className="w-full h-auto drop-shadow-2xl"
+            className="w-full h-auto drop-shadow-2xl relative z-20 pointer-events-none"
             priority
           />
 
-          <div className="absolute top-[6%] left-[11%] w-[78%] h-[80%] rounded overflow-hidden bg-black">
+          <div className="absolute z-10 top-[5%] left-[10%] w-[80%] h-[82%] rounded overflow-hidden bg-black">
             <div className="h-full overflow-y-auto scrollbar-hide">
               <a href={project.liveUrl} target="_blank">
                 <Image
